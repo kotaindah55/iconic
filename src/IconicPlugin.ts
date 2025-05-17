@@ -333,15 +333,10 @@ export default class IconicPlugin extends Plugin {
 				}
 			}));
 
-			this.registerEvent(this.app.vault.on('modify', tAbstractFile => {
-				const page = tAbstractFile instanceof TFile ? 'file' : 'folder';
-				// If a modified file/folder triggers a new ruling, refresh icons
-				if (this.ruleManager.triggerRulings(page, 'modify')) {
-					if (page === 'file') this.tabIconManager?.refreshIcons();
-					this.fileIconManager?.refreshIcons();
-					this.bookmarkIconManager?.refreshIcons();
-				}
-			}));
+			this.registerEvent(this.app.vault.on('modify', file => this.onModify(file)));
+			this.registerEvent(this.app.metadataCache.on('changed', file => this.onModify(file)));
+			// Dataview types not always present
+			// this.registerEvent(this.app.metadataCache.on('dataview:metadata-change', (_, af) => this.onModify(af)));
 
 			this.registerEvent(this.app.vault.on('delete', (tAbstractFile) => {
 				const { path } = tAbstractFile;
@@ -1311,6 +1306,16 @@ export default class IconicPlugin extends Plugin {
 				if (fileIcon.unsynced?.includes(appId)) fileIcon.unsynced?.remove(appId);
 				if (fileIcon.unsynced?.length === 0) delete fileIcon.unsynced;
 			}
+		}
+	}
+
+	private onModify(abstractFile: TAbstractFile): void {
+		const page = abstractFile instanceof TFile ? 'file' : 'folder';
+		// If a modified file/folder triggers a new ruling, refresh icons
+		if (this.ruleManager.triggerRulings(page, 'modify')) {
+			if (page === 'file') this.tabIconManager?.refreshIcons();
+			this.fileIconManager?.refreshIcons();
+			this.bookmarkIconManager?.refreshIcons();
 		}
 	}
 
