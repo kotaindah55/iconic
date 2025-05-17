@@ -89,53 +89,71 @@ export default class FileIconManager extends IconManager {
 				}
 
 				// Set up mutation observer with performance optimizations:
-				// 1. Only refresh on expand (not collapse) to reduce unnecessary updates
+				// 1. Only refresh children on expand (not collapse) to reduce unnecessary updates
 				// 2. Use debouncing to prevent multiple rapid refreshes
 				this.setMutationsObserver(itemEl, {
 					subtree: true,
 					attributeFilter: ['class', 'data-path'],
 					attributeOldValue: true,
 				}, mutations => {
-					if (mutations.some(mutation => {
-						// Always refresh on data-path changes
-						if (mutation.attributeName === 'data-path') return true;
+					let shouldRefreshChildren = false;
+					let shouldRefreshSelf = false;
 
-						// Refresh when folder is expanded
-						if (mutation.attributeName === 'class' && mutation.target instanceof HTMLElement) {
-							const wasCollapsed = mutation.oldValue?.includes('is-collapsed') ?? false;
-							const isCollapsed = mutation.target.hasClass('is-collapsed');
-							return wasCollapsed && !isCollapsed; // Only trigger on expand
+					for (const mutation of mutations) {
+						if (mutation.attributeName === 'data-path') {
+							shouldRefreshSelf = true;
+							break;
 						}
-						return false;
-					})) {
+
+						if (mutation.attributeName === 'class' && mutation.target instanceof HTMLElement) {
+							const wasCollapsed = mutation.oldValue?.includes('is-collapsed');
+							const isCollapsed = mutation.target.hasClass('is-collapsed');
+
+							if (wasCollapsed && !isCollapsed) {
+								shouldRefreshChildren = true; // expanding
+								shouldRefreshSelf = true;     // also refresh the folder itself
+							} else if (!wasCollapsed && isCollapsed) {
+								shouldRefreshSelf = true;     // collapsing
+							}
+						}
+					}
+
+					if (shouldRefreshSelf) {
+						this.refreshChildIcons([file], [itemEl]);
+					}
+					if (shouldRefreshChildren) {
 						const childItemEls = itemEl.findAll(':scope > .tree-item-children > .tree-item');
 						if (file.items && childItemEls) {
-							// Use debounced refresh to prevent multiple rapid refreshes
-							this.debouncedRefresh([file, ...file.items], [itemEl, ...childItemEls]);
+							this.debouncedRefresh(file.items, childItemEls);
 						}
 					}
 				});
 			}
 
 			let iconEl = selfEl.find(':scope > .tree-item-icon') ?? selfEl.createDiv({ cls: 'tree-item-icon' });
+			const innerEl = selfEl.find('.tree-item-inner');
+			if (iconEl !== innerEl?.previousElementSibling) {
+				innerEl?.insertAdjacentElement('beforebegin', iconEl);
+			}
 
 			if (file.items) {
 				// Toggle default icon based on expand/collapse state
 				if (file.iconDefault) file.iconDefault = iconEl.hasClass('is-collapsed')
 					? 'lucide-folder-closed'
 					: 'lucide-folder-open';
-				let folderIconEl = selfEl.find(':scope > .iconic-sidekick:not(.tree-item-icon)');
-				if (this.plugin.settings.minimalFolderIcons || !this.plugin.settings.showAllFolderIcons && !rule.icon && !rule.iconDefault) {
-					folderIconEl?.remove();
-				} else {
-					const arrowColor = rule.icon || rule.iconDefault ? null : rule.color;
-					this.refreshIcon({ icon: null, color: arrowColor }, iconEl);
-					folderIconEl = folderIconEl ?? selfEl.createDiv({ cls: 'iconic-sidekick' });
-					if (iconEl.nextElementSibling !== folderIconEl) {
-						iconEl.insertAdjacentElement('afterend', folderIconEl);
-					}
-					iconEl = folderIconEl;
+			}
+
+			let folderIconEl = selfEl.find(':scope > .iconic-sidekick:not(.tree-item-icon)');
+			if (this.plugin.settings.minimalFolderIcons || !this.plugin.settings.showAllFolderIcons && !rule.icon && !rule.iconDefault) {
+				folderIconEl?.remove();
+			} else {
+				const arrowColor = rule.icon || rule.iconDefault ? null : rule.color;
+				this.refreshIcon({ icon: null, color: arrowColor }, iconEl);
+				folderIconEl = folderIconEl ?? selfEl.createDiv({ cls: 'iconic-sidekick' });
+				if (iconEl.nextElementSibling !== folderIconEl) {
+					iconEl.insertAdjacentElement('afterend', folderIconEl);
 				}
+				iconEl = folderIconEl;
 			}
 
 			if (iconEl.hasClass('collapse-icon') && !rule.icon && !rule.iconDefault) {
