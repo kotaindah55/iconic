@@ -94,6 +94,7 @@ declare module 'obsidian' {
 
 	interface MetadataTypeManager extends Events {
 		properties: Record<string, PropertyInfo>;
+		registeredTypeWidgets: Record<string, TypeWidget>;
 	}
 
 	interface Menu {
@@ -140,6 +141,11 @@ declare module 'obsidian' {
 		ignoreFolders: string[];
 		pause: boolean;
 		syncing: boolean;
+	}
+
+	interface TypeWidget {
+		icon: string;
+		type: string;
 	}
 
 	interface Vault {
