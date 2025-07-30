@@ -1,0 +1,19 @@
+@use '../@mixins.scss' as *;
+
+/* Editor tags */
+.cm-hashtag.cm-hashtag-icon {
+	@include clickable;
+	@include icon(xs);
+	border-start-start-radius: var(--tag-radius);
+	border-end-start-radius: var(--tag-radius);
+	padding-inline-start: var(--tag-padding-x);
+}
+.cm-hashtag.cm-hashtag-icon > .svg-icon
+.cm-hashtag.cm-hashtag-icon > .iconic-emoji {
+	vertical-align: middle;
+}
+.cm-hashtag.cm-hashtag-icon + .cm-hashtag.cm-hashtag-begin {
+	border-start-start-radius: 0;
+	border-end-start-radius: 0;
+	padding-inline-start: var(--size-4-1);
+}

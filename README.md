@@ -4,7 +4,7 @@ A plugin for iconophiles, designed to blend seamlessly with vanilla Obsidian.
 
 Click almost any icon on a tab, sidebar, ribbon, or title bar to swap in one of the 1,700+ icons included in the app, or one of the 1,900+ emojis that your device supports.
 
-![Banner](banner.webp)
+![Banner](docs/res/banner.webp)
 
 > ⤿ Themes: [Ayu Light & Mirage](https://github.com/taronull/ayu-obsidian) / [Fancy-a-Story](https://github.com/ElsaTam/obsidian-fancy-a-story) / [Primary](https://github.com/primary-theme/obsidian)
 
@@ -33,7 +33,7 @@ Every icon is searchable by name. You can filter between icons and/or emojis by 
 
 You can also choose one of nine optional colors per icon. These colors follow the CSS theme of your vault, so they adjust automatically when it changes. If you prefer a specific RGB color, secondary-click the bubble to open the full color picker.
 
-![Icon picker](icon-picker.webp)
+![Icon picker](docs/res/icon-picker.webp)
 
 ### Setting up rules
 
@@ -41,7 +41,7 @@ You can automate your file & folder icons based on a variety of conditions, like
 
 Open the rulebook from the ribbon, from the plugin settings, or by using the **Open rulebook** command. There are currently two pages in the rulebook: **File rules** and **Folder rules**, which affect files and folders respectively.
 
-![Rule picker](rule-picker.webp)
+![Rule picker](docs/res/rule-picker.webp)
 
 Click the green (+) to create a new rule, then click ⚙️ to open the rule editor. Every rule has an icon, which will overrule the icon of anything which meets the conditions of that rule. A **condition** is a true or false test; it either matches, or it doesn't, and this decides whether the rule gets triggered. Rules can have multiple conditions, and you control how this is interpreted with the **All** / **Any** / **None** buttons.
 
@@ -64,7 +64,7 @@ There are several types of data you can check using a condition:
 
 Date & time conditions are checked once every minute, so you can use them to modify your icons in real time.
 
-![Rule editor](rule-editor.webp)
+![Rule editor](docs/res/rule-editor.webp)
 
 You can see what your rule is actually matching by clicking the **1 match** / **X matches** button at the bottom.
 

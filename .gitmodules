@@ -1,0 +1,3 @@
+[submodule "src/@external/obsidian-plugin-helper"]
+	path = src/@external/obsidian-plugin-helper
+	url = https://github.com/kotaindah55/obsidian-plugin-helper

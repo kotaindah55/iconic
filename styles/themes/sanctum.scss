@@ -1,0 +1,4 @@
+/* Theme: Sanctum */
+.iconic-theme-sanctum .workspace-leaf-content[data-type="file-explorer"] .nav-folder-title:has(.iconic-sidekick) > .nav-folder-title-content::before {
+	display: none;
+}

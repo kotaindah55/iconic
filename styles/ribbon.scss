@@ -1,0 +1,9 @@
+@use './@mixins.scss' as *;
+
+/* Ribbon */
+.side-dock-ribbon-action.iconic-icon > .iconic-emoji {
+	@include icon(l);
+}
+.mobile-option-setting-item-option-icon.iconic-icon {
+	cursor: var(--cursor-link);
+}
