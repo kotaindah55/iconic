@@ -1,5 +1,5 @@
 import { BookmarksView, setIcon, WebviewerPluginInstance } from 'obsidian';
-import { iterateTreeNode } from '../../@external/obsidian-plugin-helper/obsidian';
+import { iterateTreeNode } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import { BUILTIN_BOOKMARK_ICONS } from '../../constants/icons';
 import { RulePage } from '../../model/rule';
 import IconicPlugin from '../../main';

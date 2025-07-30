@@ -1,6 +1,6 @@
 import { around, ObjectFactory } from 'monkey-around';
 import { Menu, WorkspaceLeaf } from 'obsidian';
-import { getFilepathFromLeaf } from '../../@external/obsidian-plugin-helper/obsidian';
+import { getFilepathFromLeaf } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import { ItemDesc } from '../../dialogs/icon-picker';
 import IconicPlugin from '../../main';
 

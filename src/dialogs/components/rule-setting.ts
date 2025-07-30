@@ -1,5 +1,5 @@
 import { App, Component, ExtraButtonComponent, ToggleComponent } from 'obsidian';
-import { ModalEx, SettingEx } from '../../@external/obsidian-plugin-helper/obsidian';
+import { ModalEx, SettingEx } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import { RuleItem, RulePage } from '../../model/rule';
 import { setIconWithColor } from '../../utils/icon-utils';
 import Locales from '../../locales';

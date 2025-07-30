@@ -1,5 +1,5 @@
-import { ButtonExComponent, isFile, ModalEx, SettingEx } from '../@external/obsidian-plugin-helper/obsidian';
-import { Tasker } from '../@external/obsidian-plugin-helper/global';
+import { ButtonExComponent, isFile, ModalEx, SettingEx } from '../@external/obsidian-plugin-helper/src/obsidian';
+import { Tasker } from '../@external/obsidian-plugin-helper/src/global';
 import { RuleItem } from '../model/rule';
 import Locales from '../locales';
 import IconicPlugin from '../main';

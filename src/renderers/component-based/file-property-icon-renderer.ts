@@ -1,5 +1,5 @@
 import { MultiTextPropertyWidget, TextPropertyWidget } from 'obsidian';
-import { getPathFromWikilink, isWikilink } from '../../@external/obsidian-plugin-helper/obsidian';
+import { getPathFromWikilink, isWikilink } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import IconicPlugin from '../../main';
 import FileIconManager from '../../managers/file-icon-manager';
 import IconRenderer from './icon-renderer';

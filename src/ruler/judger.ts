@@ -1,5 +1,5 @@
 import { App, TAbstractFile, TFile, TFolder } from 'obsidian';
-import { unwrapRegexp } from '../@external/obsidian-plugin-helper/global';
+import { unwrapRegexp } from '../@external/obsidian-plugin-helper/src/global';
 import { Judger, PositiveOperator, RuleCondition, RuleItem } from '../model/rule';
 import * as Comparator from './comparator';
 import * as TimeComparator from './time-comparator';

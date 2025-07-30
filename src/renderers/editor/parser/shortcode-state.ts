@@ -6,8 +6,8 @@ import {
 } from '@codemirror/language';
 import { ChangeDesc, EditorState, StateField, Text, Transaction } from '@codemirror/state';
 import { SyntaxNode, Tree, TreeCursor } from '@lezer/common';
-import { ChangedRange, mergeChanges, TextCursor } from '../../../@external/obsidian-plugin-helper/codemirror';
-import { fastFind } from '../../../@external/obsidian-plugin-helper/global';
+import { ChangedRange, mergeChanges, TextCursor } from '../../../@external/obsidian-plugin-helper/src/codemirror';
+import { fastFind } from '../../../@external/obsidian-plugin-helper/src/global';
 import StreamParser, { StreamSpec } from './stream-parser';
 import StateStore from './store';
 import ShortCodeToken from '../../../model/shortcode-token';

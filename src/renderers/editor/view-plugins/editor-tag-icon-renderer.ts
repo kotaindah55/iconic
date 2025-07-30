@@ -3,8 +3,8 @@ import { Decoration, DecorationSet, EditorView, PluginValue, ViewPlugin, ViewUpd
 import { tokenClassNodeProp, syntaxTree } from '@codemirror/language';
 import { SyntaxNodeRef } from '@lezer/common';
 import { App, Component } from 'obsidian';
-import { lookBehindNode } from '../../../@external/obsidian-plugin-helper/codemirror';
-import { PlainRange, isRegionTouchedByRange } from '../../../@external/obsidian-plugin-helper/global';
+import { lookBehindNode } from '../../../@external/obsidian-plugin-helper/src/codemirror';
+import { PlainRange, isRegionTouchedByRange } from '../../../@external/obsidian-plugin-helper/src/global';
 import IconicPlugin from '../../../main';
 import TagIconManager from '../../../managers/tag-icon-manager';
 import TagIconWidget from '../widgets/tag-icon-widget';

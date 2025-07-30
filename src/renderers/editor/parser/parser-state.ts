@@ -1,5 +1,5 @@
 import { TreeCursor } from '@lezer/common';
-import { TextCursor } from '../../../@external/obsidian-plugin-helper/codemirror';
+import { TextCursor } from '../../../@external/obsidian-plugin-helper/src/codemirror';
 import { StreamSpec } from './stream-parser';
 
 const SKIPPED_NODE_RE = /table|code|formatting|escape|html|math|tag|url|barelink|atom|comment|string|meta|frontmatter|internal-link|hr(?!\w)/;

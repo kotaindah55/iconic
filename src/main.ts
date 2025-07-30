@@ -16,7 +16,7 @@ import {
 import { Prec, RangeSet } from '@codemirror/state';
 import { EditorView, ViewPlugin } from '@codemirror/view';
 
-import { getMenuItemsBySection, PluginBase } from './@external/obsidian-plugin-helper/obsidian';
+import { getMenuItemsBySection, PluginBase } from './@external/obsidian-plugin-helper/src/obsidian';
 
 import { IconBase, IconItem, IconItemCategory } from './model/icon-item';
 import { RuleItem } from './model/rule';

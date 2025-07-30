@@ -1,6 +1,6 @@
 import { lineClassNodeProp } from '@codemirror/language';
 import { TreeCursor } from '@lezer/common';
-import { ChangedRange, TextCursor } from '../../../@external/obsidian-plugin-helper/codemirror';
+import { ChangedRange, TextCursor } from '../../../@external/obsidian-plugin-helper/src/codemirror';
 import { isAlphanumeric } from '../../../utils/editor-utils';
 import { ICON_SHORTCODE_DELIM, ICON_SHORTCODE_SEPARATOR } from '../../../constants/shortcode';
 import ParserState from './parser-state';

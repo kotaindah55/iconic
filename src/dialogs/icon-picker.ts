@@ -11,8 +11,8 @@ import {
 	Setting,
 	setTooltip
 } from 'obsidian';
-import { CycleButtonComponent, ModalEx, SettingEx } from '../@external/obsidian-plugin-helper/obsidian';
-import { handleLongPress } from '../@external/obsidian-plugin-helper/dom';
+import { CycleButtonComponent, ModalEx, SettingEx } from '../@external/obsidian-plugin-helper/src/obsidian';
+import { handleLongPress } from '../@external/obsidian-plugin-helper/src/dom';
 import { COLOR_KEYS } from '../constants/colors';
 import { IconItemCategory } from '../model/icon-item';
 import { toRgb, toRgbHex } from '../utils/color-utils';

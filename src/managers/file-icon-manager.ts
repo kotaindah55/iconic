@@ -1,5 +1,5 @@
 import { TAbstractFile } from 'obsidian';
-import { getAbstractFile, isFile, isFolder } from '../@external/obsidian-plugin-helper/obsidian';
+import { getAbstractFile, isFile, isFolder } from '../@external/obsidian-plugin-helper/src/obsidian';
 import { FILE_TYPE_MAP } from '../constants/file-types';
 import { DEFAULT_FILE_ICONS } from '../constants/icons';
 import { IconBase, IconItem } from '../model/icon-item';

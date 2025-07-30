@@ -14,7 +14,7 @@ import {
 	VALUE_OPERATORS,
 	WEEKDAYS
 } from '../../constants/rule';
-import { SettingEx } from '../../@external/obsidian-plugin-helper/obsidian';
+import { SettingEx } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import { RuleCondition, RulePage } from '../../model/rule';
 import Locales from '../../locales';
 import IconicPlugin from '../../main';

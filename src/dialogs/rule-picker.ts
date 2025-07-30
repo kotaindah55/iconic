@@ -1,4 +1,4 @@
-import { ModalEx, SettingEx, SortableList } from '../@external/obsidian-plugin-helper/obsidian';
+import { ModalEx, SettingEx, SortableList } from '../@external/obsidian-plugin-helper/src/obsidian';
 import { RulePage } from '../model/rule';
 import IconicPlugin from '../main';
 import Locales from '../locales';

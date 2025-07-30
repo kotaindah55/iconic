@@ -1,5 +1,5 @@
 import { ExtraButtonComponent, Platform } from 'obsidian';
-import { SettingManager, SettingTabEx } from './@external/obsidian-plugin-helper/obsidian';
+import { SettingManager, SettingTabEx } from './@external/obsidian-plugin-helper/src/obsidian';
 import Locales from './locales';
 import IconicPlugin from './main';
 import IconicSettings from './model/settings';

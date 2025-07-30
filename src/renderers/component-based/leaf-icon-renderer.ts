@@ -1,5 +1,5 @@
 import { TFile, Workspace, WorkspaceLeaf } from 'obsidian';
-import { getFilepathFromLeaf } from '../../@external/obsidian-plugin-helper/obsidian';
+import { getFilepathFromLeaf } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import { OPENABLE_FILE_TYPES } from '../../constants/view-types';
 import { getLeavesOfOpenableFile } from '../../utils/workspace-utils';
 import { IconItemCategory } from '../../model/icon-item';

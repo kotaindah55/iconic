@@ -1,5 +1,5 @@
 import { EditorState } from '@codemirror/state';
-import { PlainRange } from '../@external/obsidian-plugin-helper/global';
+import { PlainRange } from '../@external/obsidian-plugin-helper/src/global';
 import { EditorTagIconPlugin } from '../renderers/editor/view-plugins/editor-tag-icon-renderer';
 
 /**

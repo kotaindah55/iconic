@@ -1,6 +1,6 @@
 import { Decoration, EditorView, WidgetType } from '@codemirror/view';
 import { Platform } from 'obsidian';
-import { handleLongPress } from '../../../@external/obsidian-plugin-helper/dom';
+import { handleLongPress } from '../../../@external/obsidian-plugin-helper/src/dom';
 import { setIconWithColor } from '../../../utils/icon-utils';
 import { toRgb } from '../../../utils/color-utils';
 import ShortCodeToken from '../../../model/shortcode-token';

@@ -1,6 +1,6 @@
 import { FileExplorerView } from 'obsidian';
-import { isFile, isFolder, iterateAbstractFilesAsync } from '../../@external/obsidian-plugin-helper/obsidian';
-import { TaskerState, Tasker } from '../../@external/obsidian-plugin-helper/global';
+import { isFile, isFolder, iterateAbstractFilesAsync } from '../../@external/obsidian-plugin-helper/src/obsidian';
+import { TaskerState, Tasker } from '../../@external/obsidian-plugin-helper/src/global';
 import { RulePage } from '../../model/rule';
 import IconicPlugin from '../../main';
 import FileIconManager from '../../managers/file-icon-manager';

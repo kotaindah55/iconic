@@ -1,5 +1,5 @@
 import { debounce, Debouncer, Platform, Setting, TextComponent } from 'obsidian';
-import { ButtonExComponent, ModalEx, SettingEx, SortableList } from '../@external/obsidian-plugin-helper/obsidian';
+import { ButtonExComponent, ModalEx, SettingEx, SortableList } from '../@external/obsidian-plugin-helper/src/obsidian';
 import { RuleCondition, RuleItem, RulePage } from '../model/rule';
 import { setIconWithColor } from '../utils/icon-utils';
 import IconicPlugin from '../main';

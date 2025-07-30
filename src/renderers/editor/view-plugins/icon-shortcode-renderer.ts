@@ -2,7 +2,7 @@ import { Decoration, DecorationSet, EditorView, PluginValue, ViewPlugin, ViewUpd
 import { EditorSelection, RangeSet, RangeSetBuilder } from '@codemirror/state';
 import { editorLivePreviewField } from 'obsidian';
 import { ICON_MAP } from '../../../constants/icons';
-import { fastFind, isInside, isRegionTouchedByRange, PlainRange } from '../../../@external/obsidian-plugin-helper/global';
+import { fastFind, isInside, isRegionTouchedByRange, PlainRange } from '../../../@external/obsidian-plugin-helper/src/global';
 import shortCodeState, { ShortCodeFieldValue } from '../parser/shortcode-state';
 import IconWidget from '../widgets/icon-widget';
 

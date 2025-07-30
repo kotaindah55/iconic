@@ -1,5 +1,5 @@
 import { TagView } from 'obsidian';
-import { iterateTreeNode } from '../../@external/obsidian-plugin-helper/obsidian';
+import { iterateTreeNode } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import IconicPlugin from '../../main';
 import TagIconManager from '../../managers/tag-icon-manager';
 import IconRenderer from './icon-renderer';
