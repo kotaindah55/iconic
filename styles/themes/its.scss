@@ -1,0 +1,23 @@
+/* Theme: ITS Theme */
+.iconic-theme-its .tree-item-self > .tree-item-icon {
+	margin-right: 6px;
+}
+.iconic-theme-its .workspace-leaf-content[data-type="file-explorer"] .tree-item-icon {
+	position: absolute;
+}
+.iconic-theme-its .workspace-leaf-content[data-type="file-explorer"] .nav-file-title-content {
+	margin-inline-start: var(--size-4-5);
+}
+.iconic-theme-its .workspace-leaf-content[data-type="file-explorer"] .nav-file-title-content::before,
+.iconic-theme-its .workspace-leaf-content[data-type="file-explorer"] .nav-folder-title-content::before {
+	display: none;
+}
+.iconic-theme-its .workspace-leaf-content[data-type="file-explorer"] .nav-folder-collapse-indicator {
+	display: flex;
+}
+.iconic-theme-its .workspace-leaf-content[data-type="file-explorer"] .nav-folder-title:not(:has(.iconic-sidekick)) > .nav-folder-title-content {
+	margin-inline-start: var(--size-4-5);
+}
+.iconic-theme-its .workspace-leaf-content[data-type="file-explorer"] .iconic-sidekick {
+	margin-inline-start: var(--size-4-5);
+}

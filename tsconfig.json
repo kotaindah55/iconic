@@ -1,25 +1,25 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "module": "ESNext",
-    "target": "ES2021",
-    "allowJs": true,
-    "noImplicitAny": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-	  "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2021"
-    ]
-  },
-  "include": [
-    "**/*.ts"
-  ]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"inlineSourceMap": true,
+		"inlineSources": true,
+		"module": "ESNext",
+		"target": "es2022",
+		"allowJs": true,
+		"noImplicitAny": true,
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"strictNullChecks": true,
+		"allowSyntheticDefaultImports": true,
+		"lib": ["DOM", "DOM.Iterable", "ES2021", "ES2022", "ES2024"]
+	},
+	"include": [
+		"**/*.ts",
+		"data/lucide-icons-system.mts",
+		"data/lucide-icons-extra.mts",
+		"data/emoji-shortnames.mts",
+		"data/emoji-shortcodes.mts"
+	]
 }

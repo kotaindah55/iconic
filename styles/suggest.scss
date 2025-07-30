@@ -1,0 +1,15 @@
+/* Suggestion modal */
+.suggestion-item.mod-complex .suggestion-icon .suggestion-flair.iconic-icon:empty {
+	margin-inline-end: 0;
+}
+.suggestion-flair.iconic-icon > .iconic-emoji {
+	--icon-size: var(--icon-s);
+}
+
+/* Quick Switcher++ suggest */
+.qsp-note {
+	display: flex;
+}
+.qsp-path-indicator {
+	--icon-size: var(--icon-xs);
+}

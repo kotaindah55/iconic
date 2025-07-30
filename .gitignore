@@ -1,5 +1,5 @@
 # vscode
-.vscode
+.vscode 
 
 # Intellij
 *.iml
@@ -12,6 +12,9 @@ node_modules
 # They should be uploaded to GitHub releases instead.
 main.js
 
+# Using scss files instead.
+styles.css
+
 # Exclude sourcemaps
 *.map
 
@@ -20,3 +23,15 @@ data.json
 
 # Exclude macOS Finder (System Explorer) View States
 .DS_Store
+
+# Build folder
+build
+dist
+
+# Deprecated code
+.deprecated
+*.deprecated
+
+# ignored
+.ignored
+*.ignored

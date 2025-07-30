@@ -1,0 +1,10 @@
+@use '../@mixins.scss' as *;
+
+/* Shortcodes */
+.iconic-icon.iconic-shortcode {
+	@include icon(1em);
+}
+.iconic-icon.iconic-shortcode > .svg-icon {
+	height: 1lh;
+	vertical-align: bottom;
+}

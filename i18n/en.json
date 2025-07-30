@@ -1,0 +1,347 @@
+{
+	"menu": {
+		"changeIcon": "Change icon...",
+		"changeIcon_plural": "Change {{count}} icons...",
+		"removeIcon": "Remove icon",
+		"removeIcon_plural": "Remove {{count}} icons",
+		"resetColor": "Reset color",
+		"resetColor_plural": "Reset {{count}} colors",
+		"editRule": "Edit rule..."
+	},
+	"rulePicker": {
+		"selectPage": "Select a page",
+		"fileRules": "File rules",
+		"folderRules": "Folder rules",
+		"rules": "Rules",
+		"addRule": "Add rule",
+		"editRule": "Edit rule",
+		"removeRule": "Remove rule",
+		"untitledRule": "Untitled rule",
+		"drag": "Drag to rearrange"
+	},
+	"ruleEditor": {
+		"fileRule": "File rule",
+		"folderRule": "Folder rule",
+		"conditions": "Conditions",
+		"addCondition": "Add condition",
+		"resetCondition": "Reset condition",
+		"removeCondition": "Remove condition",
+		"removeRule": "Remove rule",
+		"buttonMatch": "Check matches",
+		"enterName": "Give this rule a name",
+		"enterValue": "Enter a value",
+		"enterRegex": "Enter a regex",
+		"enterHexCode": "Enter a #hexcode",
+		"enterNumber": "Enter a number",
+		"matchConditions": {
+			"name": "Match conditions",
+			"desc": "Choose how many conditions need to match.",
+			"all": "All",
+			"any": "Any",
+			"none": "None",
+			"allTooltip": "All conditions must match",
+			"anyTooltip": "At least 1 condition must match",
+			"noneTooltip": "All conditions must fail"
+		},
+		"source": {
+			"name": "Name",
+			"basename": "Filename",
+			"extension": "Extension",
+			"parent": "Folder tree",
+			"path": "Path in vault",
+			"ctime": "Created time",
+			"mtime": "Modified time",
+			"headings": "Headings",
+			"links": "Links",
+			"tags": "Tags",
+			"properties": "Properties..."
+		},
+		"operator": {
+			"is": "is",
+			"!is": "is not",
+			"contains": "contains",
+			"!contains": "does not contain",
+			"startsWith": "starts with",
+			"!startsWith": "does not start with",
+			"endsWith": "ends with",
+			"!endsWith": "does not end with",
+			"matches": "matches regex",
+			"!matches": "does not match regex",
+			"allAre": "all are",
+			"!allAre": "any is not",
+			"allContain": "all contain",
+			"!allContain": "any does not contain",
+			"allStartWith": "all start with",
+			"!allStartWith": "any does not start with",
+			"allEndWith": "all end with",
+			"!allEndWith": "any does not end with",
+			"allMatch": "all match regex",
+			"!allMatch": "any does not match regex",
+			"anyIs": "includes item",
+			"!anyIs": "does not include item",
+			"anyContains": "any contains",
+			"!anyContains": "none contain",
+			"anyStartsWith": "any starts with",
+			"!anyStartsWith": "none start with",
+			"anyEndsWith": "any ends with",
+			"!anyEndsWith": "none end with",
+			"anyMatches": "any matches regex",
+			"!anyMatches": "none match regex",
+			"countEquals": "count is",
+			"!countEquals": "count is not",
+			"countIsLessThan": "count is less than",
+			"!countIsLessThan": "count is not less than",
+			"countIsGreaterThan": "count is more than",
+			"!countIsGreaterThan": "count is not more than",
+			"isTrue": "is true",
+			"!isTrue": "is not true",
+			"isFalse": "is false",
+			"!isFalse": "is not false",
+			"equals": "equals",
+			"!equals": "does not equal",
+			"isLessThan": "is less than",
+			"!isLessThan": "is not less than",
+			"isGreaterThan": "is more than",
+			"!isGreaterThan": "is not more than",
+			"isDivisibleBy": "is divisible by",
+			"!isDivisibleBy": "is not divisible by",
+			"isEmpty": "has no value",
+			"!isEmpty": "has any value",
+			"exists": "property is present",
+			"!exists": "property is missing",
+			"dateTimeIs": "datetime is",
+			"!dateTimeIs": "datetime is not",
+			"dateTimeBefore": "datetime before",
+			"dateTimeAfter": "datetime after",
+			"dateIs": "date is",
+			"!dateIs": "date is not",
+			"dateBefore": "date before",
+			"dateAfter": "date after",
+			"timeIs": "time is",
+			"!timeIs": "time is not",
+			"timeBefore": "time before",
+			"timeAfter": "time after",
+			"weekdayIs": "weekday is",
+			"!weekdayIs": "weekday is not",
+			"weekdayBefore": "weekday before",
+			"weekdayAfter": "weekday after",
+			"monthdayIs": "monthday is",
+			"!monthdayIs": "monthday is not",
+			"monthdayBefore": "monthday before",
+			"monthdayAfter": "monthday after",
+			"monthIs": "month is",
+			"!monthIs": "month is not",
+			"monthBefore": "month before",
+			"monthAfter": "month after",
+			"yearIs": "year is",
+			"!yearIs": "year is not",
+			"yearBefore": "year before",
+			"yearAfter": "year after"
+		},
+		"weekday": {
+			"0": "Sunday",
+			"1": "Monday",
+			"2": "Tuesday",
+			"3": "Wednesday",
+			"4": "Thursday",
+			"5": "Friday",
+			"6": "Saturday"
+		},
+		"month": {
+			"0": "January",
+			"1": "February",
+			"2": "March",
+			"3": "April",
+			"4": "May",
+			"5": "June",
+			"6": "July",
+			"7": "August",
+			"8": "September",
+			"9": "October",
+			"10": "November",
+			"11": "Desember"
+		}
+	},
+	"ruleChecker": {
+		"fileMatch": "1 matching file",
+		"fileMatch_plural": "{{count}} matching files",
+		"folderMatch": "1 matching folder",
+		"folderMatch_plural": "{{count}} matching folders",
+		"highlight": "Highlight",
+		"headingMatches": "Matches"
+	},
+	"iconPicker": {
+		"changeIcon": "Change icon",
+		"changeIcon_plural": "Change {{count}} icons",
+		"changeEmoji": "Change emoji",
+		"changeEmoji_plural": "Change {{count}} emojis",
+		"changeMix": "Change icon / emoji",
+		"changeMix_plural": "Change {{count}} icons / emojis",
+		"overrulePrefix": "Your rule ",
+		"overruleSuffix": " is overruling this icon.",
+		"overrules": "Your rulebook is overruling some of these icons.",
+		"search": "Search",
+		"searchIcons": "Search icons...",
+		"searchEmojis": "Search emojis...",
+		"searchMix": "Search icons / emojis...",
+		"changeColor": "Change color",
+		"resetColor": "Reset color",
+		"toggleIcons": "Toggle icons",
+		"toggleEmojis": "Toggle emojis",
+		"switchMode": "Switch icon / emoji mode",
+		"icons": "Icons",
+		"emojis": "Emojis",
+		"mixed": "Mixed",
+		"cancel": "Cancel",
+		"save": "Save",
+		"colors": {
+			"red": "Red",
+			"orange": "Orange",
+			"yellow": "Yellow",
+			"green": "Green",
+			"cyan": "Cyan",
+			"blue": "Blue",
+			"purple": "Purple",
+			"pink": "Pink",
+			"gray": "Gray"
+		}
+	},
+	"categories": {
+		"item": "Item",
+		"item_plural": "Items",
+		"leaf": "Tab",
+		"leaf_plural": "Tabs",
+		"file": "File",
+		"file_plural": "Files",
+		"folder": "Folder",
+		"folder_plural": "Folders",
+		"bookmark": "Bookmark",
+		"bookmark_plural": "Bookmarks",
+		"tag": "Tag",
+		"tag_plural": "Tags",
+		"property": "Property",
+		"property_plural": "Properties",
+		"ribbon": "Ribbon command",
+		"ribbon_plural": "Ribbon commands",
+		"rule": "Rule",
+		"rule_plural": "Rules"
+	},
+	"commands": {
+		"openRulebook": "Open rulebook",
+		"toggleBiggerIcons": "Toggle bigger icons",
+		"toggleClickableIcons": {
+			"desktop": "Toggle clickable icons",
+			"mobile": "Toggle tappable icons"
+		},
+		"toggleAllFileIcons": "Toggle all file icons",
+		"toggleAllFolderIcons": "Toggle all folder icons",
+		"toggleMinimalFolderIcons": "Toggle minimal folder icons",
+		"toggleBiggerSearchResults": "Toggle bigger search results",
+		"changeIconCurrentFile": "Change icon of the current file"
+	},
+	"settings": {
+		"values": {
+			"on": "On",
+			"off": "Off",
+			"desktop": "Desktop only",
+			"mobile": "Mobile only",
+			"list": "List of colors",
+			"rgb": "RGB picker"
+		},
+		"rulebook": {
+			"name": "Rulebook",
+			"desc": "Set up automated rules for file and folder icons.",
+			"manage": "Manage"
+		},
+		"headingIconBehavior": "Icon behavior",
+		"biggerIcons": {
+			"name": "Bigger icons",
+			"desc": "Show bigger icons than the default UI."
+		},
+		"clickableIcons": {
+			"nameDesktop": "Clickable icons",
+			"nameMobile": "Tappable icons",
+			"descDesktop": "Click an icon to open the icon picker.",
+			"descMobile": "Tap an icon to open the icon picker."
+		},
+		"showAllFileIcons": {
+			"name": "Show all file icons",
+			"desc": "Show icons for files that have no custom icon."
+		},
+		"showAllFolderIcons": {
+			"name": "Show all folder icons",
+			"desc": "Show icons for folders that have no custom icon."
+		},
+		"minimalFolderIcons": {
+			"name": "Minimal folder icons",
+			"desc": "Replace folder arrows with your folder icons."
+		},
+		"headingMenuAndDialogs": "Menu & dialogs",
+		"showMenuActions": {
+			"name": "Show menu actions",
+			"desc": "Show icon-related actions in context menu."
+		},
+		"showIconsAtSuggest": {
+			"name": "Show icons at suggest",
+			"desc": "Show icons beside each item in suggest modal."
+		},
+		"headingEditor": "Editor",
+		"shortCodeSuggest": {
+			"name": "Show shortcode suggest",
+			"desc": "Show autocompletion for icon & emoji shortcodes."
+		},
+		"headingIconProperty": "Icon property",
+		"useProperty": {
+			"name": "Use property",
+			"desc": "Set file icons and their color through properties."
+		},
+		"iconProperty": {
+			"name": "Property for icon",
+			"desc": "Use this property to set an icon for the file."
+		},
+		"colorProperty": {
+			"name": "Property for color",
+			"desc": "Use this property to set a color of the icon."
+		},
+		"headingIconPicker": "Icon picker",
+		"showItemName": {
+			"name": "Show item name",
+			"desc": "Show the name of the item being edited."
+		},
+		"maxSearchResults": {
+			"name": "Maximum search results",
+			"desc": "Choose how many icons to show at once."
+		},
+		"colorPicker1": {
+			"name": "Main color picker",
+			"descDesktop": "Appears when you click the color bubble.",
+			"descMobile": "Appears when you tap the color bubble."
+		},
+		"colorPicker2": {
+			"name": "Second color picker",
+			"descDesktop": "Appears when you secondary-click the color bubble.",
+			"descMobile": "Appears when you press & hold the color bubble."
+		},
+		"headingAdvanced": "Advanced",
+		"uncolorHover": {
+			"name": "Colorless hover",
+			"desc": "Disable icon color while hovering an item."
+		},
+		"uncolorDrag": {
+			"name": "Colorless drag",
+			"desc": "Disable icon color while dragging an item."
+		},
+		"uncolorSelect": {
+			"name": "Colorless selection",
+			"desc": "Disable icon color while item is selected."
+		},
+		"uncolorQuick": {
+			"name": "Colorless ribbon button",
+			"desc": "Disable icon color for the quick access ribbon button on mobile."
+		},
+		"rememberDeletedItems": {
+			"name": "Remember icons of deleted items",
+			"desc": "Any custom icons will reappear when their item exists again."
+		}
+	}
+}

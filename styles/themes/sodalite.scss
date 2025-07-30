@@ -1,0 +1,8 @@
+/* Theme: Sodalite */
+.iconic-theme-sodalite .workspace-leaf-content[data-type="file-explorer"] .nav-files-container {
+	padding-inline-start: var(--size-4-3);
+	padding-inline-end: var(--size-4-3);
+}
+.iconic-theme-sodalite .workspace-leaf-content[data-type="file-explorer"] .tree-item-inner::before {
+	display: none;
+}

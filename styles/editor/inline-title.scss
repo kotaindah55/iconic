@@ -1,0 +1,19 @@
+@use '../@mixins.scss' as *;
+
+/* Note inline title */
+.inline-title-wrapper {
+	display: flex;
+	gap: var(--size-4-2);
+}
+.inline-title-wrapper > .inline-title {
+	flex: 1 0 auto;
+}
+.inline-title-wrapper > .iconic-icon {
+	@include clickable;
+	@include icon(xl);
+	font-size: var(--inline-title-size);
+	margin-block-end: var(--inline-title-margin-bottom);
+}
+.inline-title-wrapper > .iconic-icon > .iconic-emoji {
+	vertical-align: top;
+}

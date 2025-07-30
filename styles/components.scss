@@ -1,0 +1,18 @@
+/* Sortable list */
+.setting-item + .iconic-sortable-list > .setting-item:first-child {
+	padding-top: 0.75em;
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+/* Indicators */
+.iconic-indicator {
+	pointer-events: none;
+}
+
+/* Invisibility */
+.iconic-invisible {
+	visibility: hidden;
+}
+.is-phone .iconic-reset-color.iconic-invisible {
+	display: none;
+}

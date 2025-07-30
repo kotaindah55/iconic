@@ -1,0 +1,14 @@
+@use '../@mixins.scss' as *;
+
+/* Property internal links */
+.metadata-link-inner.internal-link {
+	@include icon(xs);
+	display: flex;
+}
+.metadata-link-inner.internal-link > .iconic-icon {
+	@include clickable;
+	display: flex;
+	align-self: center;
+	text-decoration-line: none;
+	margin-inline-end: var(--size-4-1);
+}

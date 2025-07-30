@@ -1,0 +1,17 @@
+@use '../@mixins.scss' as *;
+
+/* Reading mode tags */
+a.tag {
+	display: inline-flex;
+	vertical-align: middle;
+	align-items: center;
+	gap: var(--size-4-1);
+}
+a.tag > .iconic-icon {
+	@include clickable;
+	@include icon(xs);
+}
+a.tag > .iconic-icon > .svg-icon,
+a.tag > .iconic-icon > .iconic-emoji {
+	vertical-align: middle;
+}

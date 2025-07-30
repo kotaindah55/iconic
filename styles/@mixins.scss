@@ -1,0 +1,24 @@
+@use 'sass:list';
+
+@mixin icon($size, $stroke: null) {
+	$size-list: xs, s, m, l, xl;
+
+	@if (list.index($size-list, $size)) {
+		--icon-size: var(--icon-#{$size});
+	} @else if ($size) {
+		--icon-size: #{$size};
+	}
+
+	@if (list.index($size-list, $stroke)) {
+		--icon-stroke: var(--icon-#{$stroke}-stroke-width);
+	} @else if ($stroke) {
+		--icon-stroke: #{$stroke};
+	}
+}
+
+@mixin clickable {
+	.iconic-clickable-icons &:hover {
+		filter: contrast(200%);
+		cursor: var(--cursor-link);
+	}
+}
