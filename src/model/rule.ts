@@ -21,6 +21,7 @@ export type PositiveOperator =
 	| 'isGreaterThan'
 	| 'isLessThan'
 	| 'isDivisibleBy'
+	| 'firstIs'
 	| 'allAre'
 	| 'allContain'
 	| 'allStartWith'

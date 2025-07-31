@@ -34,6 +34,10 @@ export function isDivisibleBy(input: number, condition: number = 0): boolean {
 	return input % condition === 0;
 }
 
+export function firstIs(input: string[], condition: string = ''): boolean {
+	return input[0] === condition;
+}
+
 export function allAre(input: string[], condition: string = ''): boolean {
 	return input.every(val => val === condition);
 }

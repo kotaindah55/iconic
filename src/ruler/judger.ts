@@ -191,6 +191,12 @@ function createFileJudger(app: App, condition: RuleCondition): Judger | undefine
 			return (getValue(file) === propNotExist) !== isNegated;
 		}; break;
 
+		case 'firstIs': judge = file => {
+			let value = getValue(file) as string[];
+			if (!(value instanceof Array)) return false;
+			return Comparator.firstIs(value, condVal) !== isNegated;
+		}; break;
+
 		case 'allAre': judge = file => {
 			let value = getValue(file) as string[];
 			if (!(value instanceof Array)) return false;
@@ -260,112 +266,112 @@ function createFileJudger(app: App, condition: RuleCondition): Judger | undefine
 		case 'countEquals': judge = file => {
 			let value = getValue(file) as string[];
 			if (!(value instanceof Array)) return false;
-			return Comparator.countEquals(value, Number(condVal));
+			return Comparator.countEquals(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'dateTimeIs': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.dateTimeIs(value, condVal);
+			return TimeComparator.dateTimeIs(value, condVal) !== isNegated;
 		}; break;
 
 		case 'dateTimeAfter': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.dateTimeAfter(value, condVal);
+			return TimeComparator.dateTimeAfter(value, condVal) !== isNegated;
 		}; break;
 
 		case 'dateTimeBefore': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.dateTimeBefore(value, condVal);
+			return TimeComparator.dateTimeBefore(value, condVal) !== isNegated;
 		}; break;
 
 		case 'dateIs': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.dateIs(value, condVal);
+			return TimeComparator.dateIs(value, condVal) !== isNegated;
 		}; break;
 
 		case 'dateAfter': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.dateAfter(value, condVal);
+			return TimeComparator.dateAfter(value, condVal) !== isNegated;
 		}; break;
 
 		case 'dateBefore': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.dateBefore(value, condVal);
+			return TimeComparator.dateBefore(value, condVal) !== isNegated;
 		}; break;
 
 		case 'timeIs': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.timeIs(value, condVal);
+			return TimeComparator.timeIs(value, condVal) !== isNegated;
 		}; break;
 
 		case 'timeAfter': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.timeAfter(value, condVal);
+			return TimeComparator.timeAfter(value, condVal) !== isNegated;
 		}; break;
 
 		case 'timeBefore': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.timeBefore(value, condVal);
+			return TimeComparator.timeBefore(value, condVal) !== isNegated;
 		}; break;
 
 		case 'weekdayIs': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.weekdayIs(value, Number(condVal));
+			return TimeComparator.weekdayIs(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'weekdayAfter': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.weekdayAfter(value, Number(condVal));
+			return TimeComparator.weekdayAfter(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'weekdayBefore': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.weekdayBefore(value, Number(condVal));
+			return TimeComparator.weekdayBefore(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'monthdayIs': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.monthdayIs(value, Number(condVal));
+			return TimeComparator.monthdayIs(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'monthdayAfter': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.monthdayAfter(value, Number(condVal));
+			return TimeComparator.monthdayAfter(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'monthdayBefore': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.monthdayBefore(value, Number(condVal));
+			return TimeComparator.monthdayBefore(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'monthIs': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.monthIs(value, Number(condVal));
+			return TimeComparator.monthIs(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'monthAfter': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.monthAfter(value, Number(condVal));
+			return TimeComparator.monthAfter(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'monthBefore': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.monthBefore(value, Number(condVal));
+			return TimeComparator.monthBefore(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'yearIs': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.yearIs(value, Number(condVal));
+			return TimeComparator.yearIs(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'yearAfter': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.yearAfter(value, Number(condVal));
+			return TimeComparator.yearAfter(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		case 'yearBefore': judge = file => {
 			let value = getValue(file) as number | string;
-			return TimeComparator.yearBefore(value, Number(condVal));
+			return TimeComparator.yearBefore(value, Number(condVal)) !== isNegated;
 		}; break;
 
 		default: return;
