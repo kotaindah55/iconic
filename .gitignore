@@ -35,3 +35,6 @@ dist
 # ignored
 .ignored
 *.ignored
+
+# styles.css
+styles.css
