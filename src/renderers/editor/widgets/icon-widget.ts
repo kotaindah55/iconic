@@ -2,7 +2,6 @@ import { Decoration, EditorView, WidgetType } from '@codemirror/view';
 import { Platform } from 'obsidian';
 import { handleLongPress } from '../../../@external/obsidian-plugin-helper/src/dom';
 import { setIconWithColor } from '../../../utils/icon-utils';
-import { toRgb } from '../../../utils/color-utils';
 import ShortCodeToken from '../../../model/shortcode-token';
 
 export default class IconWidget extends WidgetType implements ShortCodeToken {
@@ -70,7 +69,7 @@ export default class IconWidget extends WidgetType implements ShortCodeToken {
 
 		if (
 			!iconSVG.hasClass(this.icon) ||
-			toRgb(this.color) !== iconSVG.getAttr('stroke')
+			this.color != iconSVG.dataset['iconic-color']
 		) setIconWithColor(iconEl, this.icon, this.color);
 		return true;
 	}

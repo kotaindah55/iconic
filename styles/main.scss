@@ -20,6 +20,10 @@
 @use './dialogs/rule-editor.scss';
 @use './dialogs/rule-checker.scss';
 
+body {
+	--iconic-color: var(--icon-color);
+}
+
 // @use './themes/blue-topaz.scss';
 // @use './themes/catppuccin.scss';
 // @use './themes/cyber-glow.scss';

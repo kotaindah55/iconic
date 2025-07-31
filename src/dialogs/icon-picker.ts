@@ -15,7 +15,7 @@ import { CycleButtonComponent, ModalEx, SettingEx } from '../@external/obsidian-
 import { handleLongPress } from '../@external/obsidian-plugin-helper/src/dom';
 import { COLOR_KEYS } from '../constants/colors';
 import { IconItemCategory } from '../model/icon-item';
-import { toRgb, toRgbHex } from '../utils/color-utils';
+import { toRgbHex, toValidColor } from '../utils/color-utils';
 import { setIconWithColor } from '../utils/icon-utils';
 import IconSearch, { IconSearchResult } from '../search/icon-search';
 import RuleManager from '../ruler/rule-manager';
@@ -436,7 +436,7 @@ export default class IconPicker extends ModalEx {
 				? undefined
 				: color
 			))
-			.iconEl.setCssProps({ 'color': toRgb(color) })
+			.iconEl.setCssProps({ 'color': toValidColor(color) })
 		));
 
 		colorMenu.showAtPosition(pos);

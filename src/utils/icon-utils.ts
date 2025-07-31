@@ -1,6 +1,6 @@
 import { getIcon } from 'obsidian';
 import { ICON_HEADER_ATTRS } from '../constants/icon-header';
-import { colorFilter, toRgb } from './color-utils';
+import { colorFilter, toValidColor } from './color-utils';
 import { IconBase } from '../model/icon-item';
 import LUCIDE_ICONS_EXTRA, { IconNodeData } from '../../data/lucide-icons-extra.mjs';
 import EMOJI_SHORTNAMES from '../../data/emoji-shortnames.mjs';
@@ -52,8 +52,8 @@ export function setIconWithColor(
 
 	let iconSVG = getIcon(iconName) ?? getExtraIcon(iconName);
 	if (iconSVG) {
-		let rgbColor = toRgb(color);
-		iconSVG.setAttr('stroke', rgbColor);
+		let validColor = toValidColor(color);
+		iconSVG.setAttr('stroke', validColor);
 		iconSVG.setAttr('data-iconic-color', color);
 		parent.append(iconSVG);
 	}
@@ -78,8 +78,8 @@ export function getIconWithColor(
 	);
 
 	if (iconSVG) {
-		let rgbColor = toRgb(color);
-		iconSVG.setAttr('stroke', rgbColor);
+		let validColor = toValidColor(color);
+		iconSVG.setAttr('stroke', validColor);
 		iconSVG.setAttr('data-iconic-color', color);
 		return iconSVG;
 	}

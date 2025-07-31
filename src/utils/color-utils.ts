@@ -5,6 +5,26 @@ const COLOR_MIX_RE = /color-mix\(in srgb, rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+
 const CONVERT_EL = createDiv();
 
 /**
+ * Convert input string to a valid color.
+ */
+export function toValidColor(color?: string | null): string {
+	let cssColor = 'var(--iconic-color)';
+
+	if (!color) {
+		return cssColor;
+	} else if (DEFAULT_COLORS.has(color)) {
+		let cssVar = DEFAULT_COLORS.get(color);
+		cssColor = `var(${cssVar ?? '--iconic-color'})`;
+	} else if (CSS_COLORS.has(color)) {
+		cssColor = CSS_COLORS.get(color) ?? cssColor;
+	} else if (CSS.supports('color', color)) {
+		cssColor = color;
+	}
+
+	return cssColor;
+}
+
+/**
  * Convert color into rgb/rgba() string.
  * @param color a color name, or a specific CSS color
  */
