@@ -66,6 +66,8 @@ export default class RuleEditor extends ModalEx {
 		this.modalEl.addClass('iconic-rule-editor');
 		this.setTitle(Locales.t(`ruleEditor.${this.page}Rule`));
 
+		this.matchBtnMap = {};
+
 		// SETTING_ROW: Rule setting
 		this.addSetting(setting => setting
 			.then(() => this.ruleSetting = setting)

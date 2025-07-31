@@ -179,6 +179,7 @@ export default class IconPicker extends ModalEx {
 			.onChange(val => this.changeColor(val))
 			.then(() => {
 				this.colorPicker = picker;
+				this.changeColor(this.state.color, true);
 
 				// Handle horizontal scrolling.
 				picker.colorPickerEl.addEventListener('wheel', evt => evt.deltaY + evt.deltaX < 0
@@ -198,10 +199,22 @@ export default class IconPicker extends ModalEx {
 			})
 		);
 
+		// SEARCH: Icon search
+		this.searchSetting.addSearch(field => field
+			.setValue((this.state.icon ?? '').replace(/^lucide-/, '').replace(/-/g, ' '))
+			.setPlaceholder(Locales.t('iconPicker.searchIcons'))
+			.onChange(() => this.requestSearch())
+			.then(() => this.searchField = field)
+			.then(() => field.inputEl.enterKeyHint = 'go')
+		);
+
 		// SETTING_ROW: Search results
 		this.addSetting(setting => setting
 			.setClass('iconic-search-results')
-			.then(() => setting.settingEl.tabIndex = 0)
+			.then(() => {
+				this.resultsSetting = setting;
+				setting.settingEl.tabIndex = 0;
+			})
 			.settingEl.addEventListener('wheel', function (evt) {
 				let isRtl = this.doc.body.hasClass('mod-rtl');
 				this.scrollBy({
