@@ -8,9 +8,10 @@
 	border-end-start-radius: var(--tag-radius);
 	padding-inline-start: var(--tag-padding-x);
 }
-.cm-hashtag.cm-hashtag-icon > .svg-icon
+.cm-hashtag.cm-hashtag-icon > .svg-icon,
 .cm-hashtag.cm-hashtag-icon > .iconic-emoji {
-	vertical-align: middle;
+	height: calc(1lh - var(--tag-padding-y));
+	vertical-align: text-bottom;
 }
 .cm-hashtag.cm-hashtag-icon + .cm-hashtag.cm-hashtag-begin {
 	border-start-start-radius: 0;
