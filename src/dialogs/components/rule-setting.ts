@@ -79,13 +79,6 @@ export default class RuleSetting extends SettingEx {
 			))
 		);
 
-		// BUTTON: Drag handle
-		this.addExtraButton(button => { button
-			.setIcon('lucide-menu')
-			.setTooltip(Locales.t('rulePicker.drag'))
-			.extraSettingsEl.addClass('iconic-drag');
-		});
-
 		this.parent.registerEvent(this.plugin.ruleManager.on('iconic:change', (oldRule, newRule) => {
 			if (newRule.id !== this.rule.id) return;
 			if (
