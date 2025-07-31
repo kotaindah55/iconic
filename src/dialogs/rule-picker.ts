@@ -89,6 +89,7 @@ export default class RulePicker extends ModalEx {
 
 		// LIST: Rules
 		this.addSortableList(list => list
+			.setClass('iconic-sortable-list')
 			.then(() => this.ruleList = list)
 			.onMove((setting: RuleSetting, newIndex) => {
 				let { id, page } = setting.rule;

@@ -135,6 +135,7 @@ export default class RuleEditor extends ModalEx {
 
 		// SETTING_LIST: Conditions
 		this.addSortableList(list => list
+			.setClass('iconic-sortable-list')
 			.onAdd((setting: ConditionSetting) => {
 				this.rule.conditions.push(setting.condition);
 				this.requestUpdateJudger();
