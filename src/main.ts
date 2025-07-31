@@ -387,6 +387,10 @@ export default class IconicPlugin extends PluginBase<IconicSettings> {
 		else return id;
 	}
 
+	public getMetadata(iconSVGOrEmoji: SVGSVGElement | HTMLElement): ItemDesc | null {
+		return iconSVGOrEmoji.iconicMetadata || null;
+	}
+
 	public openIconPicker(descs: ItemDesc[], deferRuleIcon = false): void {
 		new IconPicker(this, descs, deferRuleIcon).open();
 	}
@@ -399,24 +403,35 @@ export default class IconicPlugin extends PluginBase<IconicSettings> {
 		new RuleEditor(this, rule, true).open();
 	}
 
+	public setMetadata(iconSVGOrEmoji: HTMLElement | SVGSVGElement, desc: ItemDesc): void {
+		iconSVGOrEmoji.iconicMetadata = {
+			id: desc.id,
+			category: desc.category
+		};
+	}
+
 	public setIcon(parent: HTMLElement, desc: ItemDesc & IconBase, option?: SetIconOption): void {
-		let { id, category, icon, color } = desc,
+		let { icon, color } = desc,
 			eventType = option?.rightClick ? 'contextmenu' as const : 'click' as const;
 		
 		try_reusing: if (option?.reuse) {
 			let iconSVGOrEmoji = parent.find(':scope > svg.svg-icon, :scope > .iconic-emoji');
 			if (!iconSVGOrEmoji) break try_reusing;
-			if (isEq(iconSVGOrEmoji, desc)) return;
+			if (isEq(iconSVGOrEmoji, desc)) return this.setMetadata(iconSVGOrEmoji, desc);
 		}
 
-		let iconSVGOrEmoji = setIconWithColor(parent, icon, color)
+		let iconSVGOrEmoji = setIconWithColor(parent, icon, color);
+		if (iconSVGOrEmoji) this.setMetadata(iconSVGOrEmoji, desc);
 		
 		if (!option?.noHandler) iconSVGOrEmoji?.addEventListener(eventType, (evt: MouseEvent) => {
+			let desc = this.getMetadata(iconSVGOrEmoji);
+			if (!desc) return;
+
 			if (option?.openMenu && this.actionMenu) {
 				this.extendMenu(Menu.forEvent(evt), [desc]);
 				evt.stopPropagation();
 			} else if (this.clickableIcon) {
-				this.openIconPicker([{ id, category }]);
+				this.openIconPicker([{ ...desc }]);
 				evt.stopPropagation();
 			}
 		}, { ...option });
