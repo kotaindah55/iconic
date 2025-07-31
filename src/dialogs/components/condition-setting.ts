@@ -215,7 +215,7 @@ export default class ConditionSetting extends SettingEx {
 		// Update selection
 		this.opDropdown.setValue(this.condition.operator);
 
-		this.usePropertyAsSource = true;
+		this.usePropertyAsSource = false;
 		this.refreshValueField();
 	}
 
@@ -269,7 +269,7 @@ export default class ConditionSetting extends SettingEx {
 			: this.opDropdown.getValue() as RuleCondition['operator'];;
 		this.opDropdown.setValue(this.condition.operator);
 
-		this.usePropertyAsSource = false;
+		this.usePropertyAsSource = true;
 		this.refreshValueField();
 	}
 
