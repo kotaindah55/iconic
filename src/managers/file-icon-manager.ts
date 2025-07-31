@@ -25,11 +25,10 @@ export default class FileIconManager extends IconManager {
 				delete this.iconMap[oldId];
 				this.iconMap[newId] = iconBase;
 				this.plugin.requestSave();
-				// Rerender file icon when renamed.
-				this.trigger('iconic:refresh', newId);
-			} else if (this.iconMap[newId]) {
-				this.trigger('iconic:refresh', newId);
 			}
+			
+			// Rerender file icon when renamed.
+			this.trigger('iconic:refresh', newId);
 		}));
 
 		// Delete the id when its corresponding file was deleted, if `rememberDeletedItems` is enabled.
