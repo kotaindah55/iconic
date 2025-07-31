@@ -231,10 +231,8 @@ export default class ConditionSetting extends SettingEx {
 		let props = this.app.metadataTypeManager.types,
 			srcOptions: Record<string, string> = {};
 		for (let prop in props) {
-			let currProp = props[prop];
-			if (currProp.type === 'date' || currProp.type === 'datetime') continue;
 			srcOptions[`property:${prop}`] = prop;
-		} 
+		}
 
 		this.srcDropdown.selectEl.empty();
 		this.srcDropdown.addOptions(srcOptions);

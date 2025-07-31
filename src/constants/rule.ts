@@ -8,7 +8,7 @@ export const FOLDER_SOURCES: Record<string, string> = (() => {
 })();
 
 export const FILE_SOURCES: Record<string, string> = (() => {
-	let sources = ['basename', 'extension', 'headings', 'links', 'tags', 'properties'],
+	let sources = ['basename', 'extension', 'ctime', 'mtime', 'headings', 'links', 'tags', 'properties'],
 		options: Record<string, string> = { ...FOLDER_SOURCES };
 	sources.forEach(source => options[source] = Locales.t(`ruleEditor.source.${source}`));
 	return options;
