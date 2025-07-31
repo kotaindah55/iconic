@@ -40,6 +40,7 @@ export const BOOL_OPERATORS: Record<string, string> = (() => {
 
 export const LIST_OPERATORS: Record<string, string> = (() => {
 	let opertators = [
+			'firstIs',
 			'anyIs', 'anyContains', 'anyStartsWith', 'anyEndsWith', 'anyMatches',
 			'allAre', 'allContain', 'allStartWith', 'allEndWith', 'allMatch',
 			'countEquals', 'countIsLessThan', 'countIsGreaterThan'

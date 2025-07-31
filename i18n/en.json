@@ -67,6 +67,8 @@
 			"!endsWith": "does not end with",
 			"matches": "matches regex",
 			"!matches": "does not match regex",
+			"firstIs": "first is",
+			"!firstIs": "first is not",
 			"allAre": "all are",
 			"!allAre": "any is not",
 			"allContain": "all contain",
