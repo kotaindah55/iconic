@@ -32,6 +32,7 @@ export function patchFolderTreeItem(app: App) {
 
 	view.load();
 	let folderTreeItemProto = Object.getPrototypeOf(view.fileItems['fakeFolder']) as FolderTreeItem;
+	view.unload();
 	
 	return around(folderTreeItemProto, folderTreeItemFactory);
 }
