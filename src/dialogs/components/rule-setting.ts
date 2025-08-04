@@ -1,15 +1,16 @@
-import { App, Component, ExtraButtonComponent, ToggleComponent } from 'obsidian';
-import { ModalEx, SettingEx } from '../../@external/obsidian-plugin-helper/src/obsidian';
+import { App, ExtraButtonComponent, ToggleComponent } from 'obsidian';
+import { SettingEx } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import { RuleItem, RulePage } from '../../model/rule';
 import { setIconWithColor } from '../../utils/icon-utils';
 import Locales from '../../locales';
 import IconicPlugin from '../../main';
 import RuleEditor from '../rule-editor';
+import RulePicker from '../rule-picker';
 
 export default class RuleSetting extends SettingEx {
 	private readonly app: App;
 	private readonly plugin: IconicPlugin;
-	private readonly parent: Component | ModalEx;
+	private readonly parent: RulePicker;
 
 	// Components
 	private iconBtn: ExtraButtonComponent;
@@ -20,7 +21,7 @@ export default class RuleSetting extends SettingEx {
 
 	constructor(
 		containerEl: HTMLElement,
-		parent: Component | ModalEx,
+		parent: RulePicker,
 		plugin: IconicPlugin,
 		rule: RuleItem
 	) {
@@ -52,14 +53,16 @@ export default class RuleSetting extends SettingEx {
 		// Save name when focus is lost
 		this.nameEl.addEventListener('blur', () => {
 			this.toggleEditable(false);
-			if (this.nameEl.getText()) {
-				rule.name = this.nameEl.getText();
+			let displayedName = this.nameEl.getText();
+			if (displayedName != rule.name) {
+				rule.name = displayedName;
+				this.plugin.requestSave();
 			} else {
 				this.nameEl.setText(rule.name); // Prevent untitled rules
 			}
 		});
 		this.nameEl.addEventListener('keydown', evt => {
-			if (evt.key === 'Enter') this.nameEl.blur();
+			if (evt.key === 'Enter') this.blur();
 		});
 		this.toggleEditable(true);
 
@@ -92,9 +95,28 @@ export default class RuleSetting extends SettingEx {
 		}));
 	}
 
-	private toggleEditable(value: boolean) {
-		if (value) this.nameEl.contentEditable = 'true';
+	public setDisabled(disabled: boolean): this {
+		super.setDisabled(disabled);
+		this.blur();
+		return this;
+	}
+
+	public blur(): this {
+		this.nameEl.blur();
+		return this;
+	}
+
+	private isDisabled(): boolean {
+		return this.settingEl.hasClass('is-disabled');
+	}
+
+	private toggleEditable(value: boolean): void {
+		let isDisabled = this.isDisabled();
+
+		if (value && !isDisabled) this.nameEl.contentEditable = 'true';
 		else this.nameEl.removeAttribute('contenteditable');
+
+		if (isDisabled) return;
 
 		// Select text if element isn't focused already
 		if (value && !this.nameEl.isActiveElement()) {

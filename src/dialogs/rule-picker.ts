@@ -1,3 +1,4 @@
+import { prepareFuzzySearch, SearchComponent, SearchResult } from 'obsidian';
 import { ModalEx, SettingEx, SortableList } from '../@external/obsidian-plugin-helper/src/obsidian';
 import { RulePage } from '../model/rule';
 import IconicPlugin from '../main';
@@ -11,28 +12,41 @@ const PAGE_OPTIONS = {
 	folder: Locales.t('rulePicker.folderRules'),
 };
 
+const COLLATOR = new Intl.Collator(undefined, { numeric: true, caseFirst: 'false' });
+
 export default class RulePicker extends ModalEx {
 	private readonly plugin: IconicPlugin;
 	private readonly state: IconicSettings['dialogState'];
 	private readonly ruleManager: RuleManager;
 
+	private headingSetting: SettingEx;
+	private searchField: SearchComponent;
+
 	private selectPageSetting: SettingEx;
 	private addRuleSetting: SettingEx;
 	private ruleList: SortableList;
 
-	get page(): RulePage {
+	private searchQuery: string | null;
+	private searchResult: RuleSetting[];
+
+	private get page(): RulePage {
 		return this.state.rulePage;
 	}
-	set page(page: RulePage) {
+	private set page(page: RulePage) {
 		this.state.rulePage = page;
 		this.plugin.requestSave();
 	}
+
+	public searchMode: boolean;
 
 	constructor(plugin: IconicPlugin) {
 		super(plugin.app);
 		this.plugin = plugin;
 		this.state = plugin.settings.dialogState;
 		this.ruleManager = plugin.ruleManager;
+		this.searchMode = false;
+		this.searchQuery = null;
+		this.searchResult = [];
 
 		this.draw();
 	}
@@ -42,6 +56,7 @@ export default class RulePicker extends ModalEx {
 
 		this.registerEvent(this.ruleManager.on('iconic:add', rule => {
 			if (rule.page !== this.page) return;
+			if (this.searchMode) this.stopSearch();
 			this.ruleList.addSetting(RuleSetting, [
 				this.ruleList.listEl, this, this.plugin, rule
 			]);
@@ -49,6 +64,7 @@ export default class RulePicker extends ModalEx {
 
 		this.registerEvent(this.ruleManager.on('iconic:delete', deletedRule => {
 			if (deletedRule.page !== this.page) return;
+			if (this.searchMode) this.stopSearch();
 			let targetSetting = this.ruleList.settings.find(
 				({ rule }: RuleSetting) => rule.id === deletedRule.id
 			);
@@ -85,6 +101,14 @@ export default class RulePicker extends ModalEx {
 		this.addSetting(setting => setting
 			.setName(Locales.t('rulePicker.rules'))
 			.setHeading()
+			.then(() => this.headingSetting = setting)
+		);
+
+		// SEARCH: Search rules
+		this.headingSetting.addSearch(field => field
+			.setPlaceholder(Locales.t('rulePicker.search'))
+			.onChange(val => this.runSearch(val))
+			.then(() => this.searchField = field)
 		);
 
 		// LIST: Rules
@@ -113,6 +137,54 @@ export default class RulePicker extends ModalEx {
 		);
 	}
 
+	private runSearch(query: string | null): void {
+		if (!query) return this.stopSearch();
+
+		this.searchMode = true;
+		this.searchQuery = query;
+
+		if (this.addRuleSetting.settingEl.isShown())
+			this.addRuleSetting.setHidden(true, true);
+
+		let settings = this.ruleList.settings as RuleSetting[],
+			search = prepareFuzzySearch(query);
+
+		this.searchResult = settings
+			.map<[SearchResult | null, RuleSetting]>(setting => [search(setting.rule.name), setting])
+			.filter((result): result is [SearchResult, RuleSetting] => !!result[0])
+			.sort((a, b) => {
+				let nameA = a[1].rule.name,
+					nameB = b[1].rule.name,
+					scoreA = a[0].score,
+					scoreB = b[0].score;
+
+				return scoreB - scoreA || COLLATOR.compare(nameA, nameB);
+			})
+			.map(result => result[1]);
+
+		this.showSearchResult();
+	}
+
+	private stopSearch(): void {
+		this.searchMode = false;
+		this.searchQuery = null;
+		this.searchResult.splice(0);
+
+		this.addRuleSetting.setHidden(false);
+		
+		this.ruleList.setDisabled(false);
+		this.ruleList.listEl.empty();
+		this.ruleList.settings.forEach(setting => this.ruleList.listEl.append(setting.settingEl));
+	}
+
+	private showSearchResult(): void {
+		if (!this.searchMode) return;
+
+		this.ruleList.listEl.empty();
+		this.ruleList.setDisabled(true);
+		this.searchResult.forEach(setting => this.ruleList.listEl.append(setting.settingEl));
+	}
+
 	private listRules(): void {
 		let ruleMap = this.ruleManager.getRules(this.page);
 		this.ruleList.clear();
@@ -121,6 +193,8 @@ export default class RulePicker extends ModalEx {
 			RuleSetting,
 			[this.ruleList.listEl, this, this.plugin, ruleMap[id]]
 		);
+
+		if (this.searchMode) this.runSearch(this.searchQuery);
 	}
 
 	private addRule(): void {
