@@ -114,9 +114,9 @@ export default class LeafIconRenderer extends IconRenderer {
 			icon: string,
 			color: string | undefined;
 		
-		// If the type is one of the OPENABEL_FILE_TYPES, then use file icon
+		// If the type is one of the OPENABLE_FILE_TYPES, then use file icon
 		// instead.
-		if (filepath) {
+		if (filepath && OPENABLE_FILE_TYPES.has(id)) {
 			let iconItem = this.fileIconManager.getIconItem(filepath);
 			id = filepath;
 			icon = iconItem.icon ?? iconItem.iconDefault ?? leaf.getIcon();
