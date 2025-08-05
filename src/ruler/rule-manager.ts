@@ -113,10 +113,16 @@ export default class RuleManager extends Events {
 			: this.folderRuleMap[id];
 	}
 
-	public getRules(page: RulePage): Record<string, RuleItem> {
+	public getRuleMap(page: RulePage): Record<string, RuleItem> {
 		return page === 'file'
 			? this.fileRuleMap
 			: this.folderRuleMap;
+	}
+
+	public getRules(page: RulePage): RuleItem[] {
+		return page === 'file'
+			? this.fileRules
+			: this.folderRules;
 	}
 
 	/**

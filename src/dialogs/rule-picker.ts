@@ -186,13 +186,13 @@ export default class RulePicker extends ModalEx {
 	}
 
 	private listRules(): void {
-		let ruleMap = this.ruleManager.getRules(this.page);
+		let rules = this.ruleManager.getRules(this.page);
 		this.ruleList.clear();
 
-		for (let id in ruleMap) this.ruleList.addSetting(
+		rules.forEach(rule => this.ruleList.addSetting(
 			RuleSetting,
-			[this.ruleList.listEl, this, this.plugin, ruleMap[id]]
-		);
+			[this.ruleList.listEl, this, this.plugin, rule]
+		));
 
 		if (this.searchMode) this.runSearch(this.searchQuery);
 	}
