@@ -201,7 +201,7 @@ export default class RulePicker extends ModalEx {
 	private addRule(): void {
 		this.ruleManager.addRule(this.page, {
 			name: 'Untitled rule',
-			icon: 'lucide-file',
+			icon: this.page == 'file' ? 'lucide-file' : 'lucide-folder',
 			match: 'all',
 			conditions: []
 		});
