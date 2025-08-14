@@ -188,7 +188,7 @@ function createFileJudger(app: App, condition: RuleCondition): Judger | undefine
 		}; break;
 
 		case 'exists': judge = file => {
-			return (getValue(file) === propNotExist) !== isNegated;
+			return (getValue(file) !== propNotExist) !== isNegated;
 		}; break;
 
 		case 'firstIs': judge = file => {
