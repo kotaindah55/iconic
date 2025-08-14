@@ -4,6 +4,7 @@ export * from './factories/drag-manager';
 export * from './factories/file-manager';
 export * from './factories/file-suggest-modal';
 export * from './factories/folder-tree-item';
+export * from './factories/global-search-tree-root';
 export * from './factories/markdown-view';
 export * from './factories/metadata-editor';
 export * from './factories/property-tree-item';

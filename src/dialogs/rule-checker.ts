@@ -39,7 +39,7 @@ export default class RuleChecker extends ModalEx {
 
 		this.setTitle(Locales.t(`ruleChecker.${this.rule.page}Match`, { count: qualifiedFiles.length }));
 
-		this.tasker.queue(async state => {
+		this.tasker.enqueue(async state => {
 			for (let i = 0; i < qualifiedFiles.length; i++) {
 				let file = qualifiedFiles[i],
 					parent = file.parent?.path,
@@ -69,7 +69,7 @@ export default class RuleChecker extends ModalEx {
 				// Keep the UI responsive on vault with large number of files.
 				if (i % 100 === 0) {
 					// Do short circuit when needed, e.g. when closing the modal.
-					if (state?.mustCancelCurrent) return;
+					if (state?.cancelCurrent) return;
 					await sleep(10);
 				}
 			}

@@ -46,10 +46,10 @@ export default class FileExplorerIconRenderer extends IconRenderer {
 	 * Overriden `onload()`, with the purpose of {@link tasker} wrapping.
 	 */
 	public override onload(): void {
-		let renderCallback = (id: string) => this.tasker.queue(async () => this.renderSingle(id));
+		let renderCallback = (id: string) => this.tasker.enqueue(async () => this.renderSingle(id));
 
 		// Wait for all files to be resolved at the first time.
-		this.tasker.queue(() => this.plugin.firstResolve);
+		this.tasker.enqueue(() => this.plugin.firstResolve);
 
 		// Call when user added, changed, or deleted an icon.
 		this.registerEvent(this.iconManager.on('iconic:add', renderCallback));
@@ -92,11 +92,11 @@ export default class FileExplorerIconRenderer extends IconRenderer {
 		);
 
 		// Append all iconEls to all tree items.
-		this.tasker.queue(state => this.appendAllIconEls(state));
+		this.tasker.enqueue(state => this.appendAllIconEls(state));
 
 		// Append an iconEl to the newly created tree item.
 		this.registerEvent(this.app.vault.on('create', ({ path: id }) =>
-			this.tasker.queue(async () => this.appendSingleIconEl(id), 0)
+			this.tasker.enqueue(async () => this.appendSingleIconEl(id), 0)
 		));
 	}
 
@@ -176,7 +176,7 @@ export default class FileExplorerIconRenderer extends IconRenderer {
 			amount++;
 			if (amount % 100 === 0) {
 				// Do short circuit when needed, e.g. before unloading the plugin.
-				if (state?.mustCancelCurrent) return;
+				if (state?.cancelCurrent) return;
 				await sleep(5);
 			}
 		}
@@ -193,7 +193,7 @@ export default class FileExplorerIconRenderer extends IconRenderer {
 		if (page != 'file') this.tasker.cancelLabel('refresh-folder');
 		if (page == 'all') this.tasker.cancelLabel('refresh-all');
 
-		this.tasker.queue(state => iterateAbstractFilesAsync(this.app, async file => {
+		this.tasker.enqueue(state => iterateAbstractFilesAsync(this.app, async file => {
 			if (isFile(file) && page == 'folder') return;
 			if (isFolder(file) && page == 'file') return;
 			this.renderSingle(file.path);
@@ -202,7 +202,7 @@ export default class FileExplorerIconRenderer extends IconRenderer {
 			amount++;
 			if (amount % 100 === 0) {
 				// Do short circuit when needed, e.g. before unloading the plugin.
-				if (state?.mustCancelCurrent) return;
+				if (state?.cancelCurrent) return;
 				await sleep(5);
 			}
 		}), 5, label);
