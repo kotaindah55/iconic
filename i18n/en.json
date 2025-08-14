@@ -13,6 +13,7 @@
 		"fileRules": "File rules",
 		"folderRules": "Folder rules",
 		"rules": "Rules",
+		"rulesDesc": "The higher its position, the higher its precedence.",
 		"search": "Search rules...",
 		"addRule": "Add rule",
 		"editRule": "Edit rule",

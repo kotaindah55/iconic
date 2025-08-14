@@ -100,6 +100,7 @@ export default class RulePicker extends ModalEx {
 		// HEADING: Rules
 		this.addSetting(setting => setting
 			.setName(Locales.t('rulePicker.rules'))
+			.setDesc(Locales.t('rulePicker.rulesDesc'))
 			.setHeading()
 			.then(() => this.headingSetting = setting)
 		);
