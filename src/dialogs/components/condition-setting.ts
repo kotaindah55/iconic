@@ -37,7 +37,9 @@ export default class ConditionSetting extends SettingEx {
 	public valOptions?: Record<string, string>;
 	public dragBtn: ExtraButtonComponent;
 
-	private usePropertyAsSource: boolean;
+	private get usePropertyAsSource(): boolean {
+		return this.condition.source.startsWith('property:');
+	}
 
 	// Callbacks
 	private changeCallback?: (self: ConditionSetting) => void;
@@ -54,7 +56,6 @@ export default class ConditionSetting extends SettingEx {
 		this.plugin = plugin;
 		this.page = page;
 		this.condition = condition;
-		this.usePropertyAsSource = false;
 
 		this.setClass('iconic-condition');
 		this.infoEl.detach();
@@ -73,7 +74,7 @@ export default class ConditionSetting extends SettingEx {
 			.setTooltip(Locales.t('ruleEditor.removeCondition'))
 			.then(btn => this.removeBtn = btn)
 			.onClick(() => this.handleRemoveBtnClick())
-			.extraSettingsEl.setCssStyles({ color: '--color-red' })
+			.extraSettingsEl.addClass('mod-warning')
 		);
 
 		// DROPDOWN: Source
@@ -112,7 +113,7 @@ export default class ConditionSetting extends SettingEx {
 			})
 		);
 
-		if (this.condition.source.startsWith('property:')) {
+		if (this.usePropertyAsSource) {
 			this.refreshPropertyDropdowns();
 		} else {
 			this.refreshDropdowns();
@@ -214,8 +215,6 @@ export default class ConditionSetting extends SettingEx {
 		}
 		// Update selection
 		this.opDropdown.setValue(this.condition.operator);
-
-		this.usePropertyAsSource = false;
 		this.refreshValueField();
 	}
 
@@ -269,7 +268,6 @@ export default class ConditionSetting extends SettingEx {
 			: this.opDropdown.getValue() as RuleCondition['operator'];;
 		this.opDropdown.setValue(this.condition.operator);
 
-		this.usePropertyAsSource = true;
 		this.refreshValueField();
 	}
 
