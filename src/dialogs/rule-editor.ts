@@ -49,6 +49,11 @@ export default class RuleEditor extends ModalEx {
 
 	public override onOpen(): void {
 		this.rule.conditions.forEach(cond => this.addCondition(cond));
+
+		this.conditionList.onAdd((setting: ConditionSetting) => {
+			this.rule.conditions.push(setting.condition);
+			this.requestUpdateJudger();
+		});
 	}
 
 	public override onClose(): void {
@@ -138,10 +143,6 @@ export default class RuleEditor extends ModalEx {
 		// SETTING_LIST: Conditions
 		this.addSortableList(list => list
 			.setClass('iconic-sortable-list')
-			.onAdd((setting: ConditionSetting) => {
-				this.rule.conditions.push(setting.condition);
-				this.requestUpdateJudger();
-			})
 			.onRemove((setting: ConditionSetting) => {
 				this.rule.conditions.remove(setting.condition);
 				this.requestUpdateJudger();
