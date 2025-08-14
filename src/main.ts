@@ -4,6 +4,7 @@ import {
 	BookmarksView,
 	FileExplorerView,
 	FilePropertiesView,
+	GlobalSearchView,
 	MarkdownView,
 	Menu,
 	Platform,
@@ -46,6 +47,7 @@ import {
 	patchFileManager,
 	patchFileSuggestModal,
 	patchFolderTreeItem,
+	patchGlobalSearchTreeRoot,
 	patchMarkdownView,
 	patchMetadataEditor,
 	patchPropertyTreeItem,
@@ -75,6 +77,7 @@ import AllPropertiesIconRenderer from './renderers/component-based/all-propertie
 import NoteTitleIconRenderer from './renderers/component-based/note-title-icon-renderer';
 import TagPaneIconRenderer from './renderers/component-based/tag-pane-icon-renderer';
 import MetadataEditorIconRenderer from './renderers/component-based/metadata-editor-icon-renderer';
+import GlobalSearchIconRenderer from './renderers/component-based/global-search-icon-renderer';
 
 import IconPicker, { ItemDesc } from './dialogs/icon-picker';
 import RulePicker from './dialogs/rule-picker';
@@ -184,6 +187,7 @@ export default class IconicPlugin extends PluginBase<IconicSettings> {
 		this.register(patchFileManager(this.app));
 		this.register(patchFileSuggestModal(this));
 		this.register(patchFolderTreeItem(this.app));
+		this.register(patchGlobalSearchTreeRoot(this.app));
 		this.register(patchMarkdownView());
 		this.register(patchMetadataEditor(this));
 		this.register(patchPropertyTreeItem(this));
@@ -548,6 +552,8 @@ export default class IconicPlugin extends PluginBase<IconicSettings> {
 			new AllPropertiesIconRenderer(this, view as AllPropertiesView);
 		else if (viewType === 'tag')
 			new TagPaneIconRenderer(this, view as TagView)
+		else if (viewType === 'search')
+			new GlobalSearchIconRenderer(this, view as GlobalSearchView);
 		else if (view instanceof MarkdownView)
 			new NoteTitleIconRenderer(this, view);
 	}

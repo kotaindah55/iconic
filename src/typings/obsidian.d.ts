@@ -12,6 +12,7 @@ import NoteTitleIconRenderer from 'src/renderers/component-based/note-title-icon
 import FilePropertyIconRenderer from 'src/renderers/component-based/file-property-icon-renderer';
 import FileSuggestIconProvider from 'src/renderers/icon-provider/file-suggest-icon-provider';
 import TagSuggestIconProvider from 'src/renderers/icon-provider/tag-suggest-icon-provider';
+import GlobalSearchIconRenderer from 'src/renderers/component-based/global-search-icon-renderer';
 
 declare module 'obsidian' {
 	interface AbstractFileTreeItem<T extends TAbstractFile> {
@@ -49,6 +50,21 @@ declare module 'obsidian' {
 	interface FileSuggestModal {
 		/** @patch */
 		iconProvider: FileSuggestIconProvider;
+	}
+
+	interface GlobalSearchResultTreeItem {
+		/** @patch */
+		iconEl?: HTMLElement;
+	}
+
+	interface GlobalSearchTreeRoot {
+		/** @patch */
+		view: GlobalSearchView;
+	}
+
+	interface GlobalSearchView {
+		/** @patch */
+		iconRenderer: GlobalSearchIconRenderer;
 	}
 
 	interface MarkdownView {
