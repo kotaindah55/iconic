@@ -187,7 +187,7 @@ export default class RuleManager extends Events {
 		let rule = this.getRule(page, id);
 		if (!rule) return;
 
-		// Keep the old rule for a while, will be passed the trigger() argument.
+		// Keep the old rule for a while, will be passed as the trigger() argument.
 		let prevRule: RuleItem = { ...rule };
 		Object.assign(rule, spec);
 		this.plugin.requestSave();

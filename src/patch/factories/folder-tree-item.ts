@@ -19,6 +19,8 @@ const folderTreeItemFactory: ObjectFactory<FolderTreeItem> = {
 			let icon = `lucide-folder-${this.collapsed ? 'closed' : 'open'}`,
 				category = 'folder' as const;
 			plugin.setIcon(iconEl, { id, category, icon });
+		} else if (hasIcon) {
+			iconEl?.show();
 		} else {
 			iconEl?.empty();
 			iconEl?.hide();
