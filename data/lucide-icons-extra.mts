@@ -32,7 +32,7 @@ export interface IconProps {
  * @see https://github.com/lucide-icons/lucide
  * @see https://github.com/lucide-icons/lucide-lab
  * 
- * @version Lucide-0.525.0
+ * @version Lucide-0.539.0
  * @since Lucide-0.447.0
  */
 const LUCIDE_ICONS_EXTRA = lucide_icons_extra as unknown as Record<string, IconProps>;
