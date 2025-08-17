@@ -159,8 +159,7 @@ export default class FileExplorerIconRenderer extends IconRenderer {
 		treeItem.iconEl = iconEl;
 		treeItem.innerEl.before(iconEl);
 
-		if ('vChildren' in treeItem) iconEl.addClass('iconic-sidekick');
-		else iconEl.addClass('tree-item-icon');
+		iconEl.addClass('iconic-sidekick');
 		this.renderSingle(id);
 	}
 

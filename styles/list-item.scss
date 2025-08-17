@@ -12,6 +12,11 @@
 	margin-inline-end: var(--size-4-1);
 	opacity: var(--icon-opacity);
 }
+.tree-item-self > .iconic-sidekick > img {
+	height: var(--icon-size);
+	width: var(--icon-size);
+	max-width: none;
+}
 .iconic-bigger-icons .tree-item-self > .iconic-icon {
 	@include icon(s, s);
 }

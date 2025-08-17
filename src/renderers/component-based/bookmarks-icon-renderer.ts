@@ -87,7 +87,9 @@ export default class BookmarksIconRenderer extends IconRenderer {
 	public override onunload(): void {
 		// Revert to the default icon when the bookmarks view is still loaded.
 		if (this.view._loaded) iterateTreeNode(this.view.tree, treeItem => {
-			treeItem.iconEl.removeClass('iconic-icon');
+			treeItem.iconEl.removeClass('iconic-icon', 'iconic-sidekick');
+			treeItem.iconEl.addClass('tree-item-icon');
+
 			if ('vChildren' in treeItem) {
 				treeItem.iconEl.detach();
 				Reflect.deleteProperty(treeItem, 'iconEl');
@@ -163,14 +165,12 @@ export default class BookmarksIconRenderer extends IconRenderer {
 		if (!treeItem) return;
 
 		if ('collapsed' in treeItem) {
-			treeItem.iconEl = createDiv({
-				cls: ['iconic-sidekick', 'iconic-icon']
-			});
+			treeItem.iconEl = createDiv();
 			treeItem.innerEl.before(treeItem.iconEl);
-		} else {
-			treeItem.iconEl.addClass('iconic-icon');
 		}
-
+		
+		treeItem.iconEl.addClass('iconic-icon', 'iconic-sidekick');
+		treeItem.iconEl.removeClass('tree-item-icon');
 		this.renderSingle(id);
 	}
 
@@ -180,11 +180,7 @@ export default class BookmarksIconRenderer extends IconRenderer {
 	private appendAllIconEls(): void {
 		iterateTreeNode(this.view.tree, treeItem => {
 			let id = treeItem.item.ctime.toString();
-			if ('collapsed' in treeItem) this.appendSingleIconEl(id);
-			else {
-				treeItem.iconEl.addClass('iconic-icon');
-				this.renderSingle(id);
-			}
+			this.appendSingleIconEl(id);
 		});
 	}
 
