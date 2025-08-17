@@ -44,21 +44,18 @@ export default class BookmarksIconRenderer extends IconRenderer {
 	public onload(): void {
 		super.onload();
 
-		// Append all iconEls to all tree items.
-		this.app.workspace.onLayoutReady(async () => {
-			// TODO: Use better approach instead of waiting sleep timeout
-			await sleep(500);
+		let init = async () => {
 			await this.plugin.firstResolve;
 			this.appendAllIconEls();
-		});
+		};
 
-		this.registerEvent(this.iconManager.bookmarksPlugin.on('add', async item => {
-			// TODO: Use better approach instead of waiting sleep timeout
-			await sleep(500);
+		// Append all iconEls to all tree items.
+		this.app.workspace.onLayoutReady(this.view.ready ? init : () => this.view.onUpdate(init));
+
+		this.registerEvent(this.iconManager.bookmarksPlugin.on('add', item => this.view.onUpdate(() => {
 			let id = item.ctime.toString();
-			if (item.type === 'group') this.appendSingleIconEl(id);
-			else this.renderSingle(id);
-		}));
+			this.appendSingleIconEl(id);
+		})));
 
 		// Update all file/folder icons whenever the rules were updated.
 		this.registerEvent(this.plugin.ruleManager.on('iconic:update', page => {
@@ -127,10 +124,13 @@ export default class BookmarksIconRenderer extends IconRenderer {
 			this.webviewerPlugin.db.setIcon(iconEl, bookmarkItem.url).then(() => {
 				let favIcon = iconEl.firstElementChild;
 				if (!favIcon) return;
+
 				favIcon.addEventListener('click', evt => {
 					this.plugin.openIconPicker([{ id, category }]);
 					evt.stopPropagation();
 				});
+
+				favIcon.nextSibling?.detach();
 			});
 			return;
 		}

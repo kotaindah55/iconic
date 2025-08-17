@@ -40,6 +40,12 @@ declare module 'obsidian' {
 	interface BookmarksView {
 		/** @patch */
 		iconRenderer: BookmarksIconRenderer;
+		/** @patch */
+		onUpdateCallbacks?: (() => unknown)[];
+		/** @patch */
+		ready: boolean;
+		/** @patch */
+		onUpdate(cb: () => unknown): void;
 	}
 
 	interface FileExplorerView {

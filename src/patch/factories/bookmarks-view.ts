@@ -1,4 +1,4 @@
-import { App, BookmarkGroupTreeItem, BookmarkItemGroup, BookmarksView } from 'obsidian';
+import { App, BookmarkGroupTreeItem, BookmarkItemGroup, BookmarksView, Component } from 'obsidian';
 import { around, ObjectFactory } from 'monkey-around';
 import { mockLeaf } from '../mock/mock-utils';
 import { BookmarksPluginInstance } from '../mock/classes';
@@ -19,6 +19,26 @@ const bookmarksViewFactory: ObjectFactory<BookmarksView> = {
 		this.update();
 		this.getItemDom(newGroup).startRename();
 		this.plugin.trigger('add', newGroup);
+	},
+	onload: oldFn => function (this: BookmarksView) {
+		oldFn.call(this);
+		this.ready = false;
+		this.onUpdateCallbacks = [];
+
+		let storedCallbacksRemover = new Component();
+		this.addChild(storedCallbacksRemover);
+		storedCallbacksRemover.registerEvent(this.app.workspace.on('iconic-mod:plugin-unload', () => {
+			delete this.onUpdateCallbacks;
+			this.removeChild(storedCallbacksRemover);
+		}));
+	},
+	onUpdate: () => function (this: BookmarksView, cb) {
+		this.onUpdateCallbacks?.push(cb);
+	},
+	update: oldFn => function (this: BookmarksView) {
+		oldFn.call(this);
+		this.ready ||= true;
+		this.onUpdateCallbacks?.splice(0).forEach(cb => cb());
 	}
 }
 
