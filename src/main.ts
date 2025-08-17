@@ -102,6 +102,10 @@ export interface ManagerMap {
 	'ribbon': RibbonIconManager;
 }
 
+export function isTagWranglerEnabled(app: App): boolean {
+	return !!app.plugins.getPlugin('tag-wrangler');
+}
+
 export default class IconicPlugin extends PluginBase<IconicSettings> {
 	public api: IconicAPI;
 
@@ -230,14 +234,10 @@ export default class IconicPlugin extends PluginBase<IconicSettings> {
 			if (leaf) this.tryInjectRenderer(leaf);
 		}));
 
-		/* this.registerEvent(this.app.workspace.on('deferred-load', leaf => {
-			this.tryInjectRenderer(leaf);
-		})); */
-
 		this.registerUndeferCallback(leaf => this.tryInjectRenderer(leaf));
 
 		this.registerEvent(this.app.workspace.on('editor-menu', (menu, editor) => {
-			if (!this.settings.showMenuActions) return;
+			if (!this.settings.showMenuActions || isTagWranglerEnabled(this.app)) return;
 			let clickCoords = editor.cm.plugin(clickCoordsHook);
 			if (!clickCoords) return;
 			let pos = editor.cm.posAtCoords(clickCoords);
@@ -277,6 +277,11 @@ export default class IconicPlugin extends PluginBase<IconicSettings> {
 				item.iconEl.append(iconSVG.cloneNode(true));
 			});
 		})));
+
+		this.registerEvent(this.app.workspace.on('tag-wrangler:contextmenu', (menu, tag) => {
+			if (!this.actionMenu) return;
+			this.extendMenu(menu, [{ id: tag, category: 'tag' }]);
+		}));
 
 		this.registerEvent(this.settingManager.on('settings-change', changed => {
 			this.setAppearance(changed);

@@ -1,5 +1,5 @@
 import { App, MarkdownRenderChild, Menu } from 'obsidian';
-import IconicPlugin from '../../main';
+import IconicPlugin, { isTagWranglerEnabled } from '../../main';
 import TagIconManager from '../../managers/tag-icon-manager';
 
 /**
@@ -79,7 +79,7 @@ export default class TagIconPostProcessor extends MarkdownRenderChild {
 				{ id, icon, color, category } = iconItem;
 
 			this.registerDomEvent(tagEl, 'contextmenu', evt => {
-				if (!this.plugin.actionMenu) return;
+				if (!this.plugin.actionMenu || isTagWranglerEnabled(this.app)) return;
 				this.plugin.extendMenu(Menu.forEvent(evt), [{ id, category }]);
 				evt.preventDefault();
 			});
