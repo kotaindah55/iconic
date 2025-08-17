@@ -24,7 +24,7 @@ export default class RulePicker extends ModalEx {
 
 	private selectPageSetting: SettingEx;
 	private addRuleSetting: SettingEx;
-	private ruleList: SortableList;
+	private ruleList: SortableList<RuleSetting>;
 
 	private searchQuery: string | null;
 	private searchResult: RuleSetting[];
@@ -57,16 +57,13 @@ export default class RulePicker extends ModalEx {
 		this.registerEvent(this.ruleManager.on('iconic:add', rule => {
 			if (rule.page !== this.page) return;
 			if (this.searchMode) this.stopSearch();
-			this.ruleList.addSetting(RuleSetting, [
-				this.ruleList.listEl, this, this.plugin, rule
-			]);
+			this.ruleList.addSetting(new RuleSetting(this.ruleList.listEl, this, this.plugin, rule));
 		}));
 
 		this.registerEvent(this.ruleManager.on('iconic:delete', deletedRule => {
 			if (deletedRule.page !== this.page) return;
-			if (this.searchMode) this.stopSearch();
 			let targetSetting = this.ruleList.settings.find(
-				({ rule }: RuleSetting) => rule.id === deletedRule.id
+				({ rule }) => rule.id === deletedRule.id
 			);
 			if (targetSetting) this.ruleList.removeSetting(targetSetting);
 		}));
@@ -139,10 +136,10 @@ export default class RulePicker extends ModalEx {
 		);
 
 		// LIST: Rules
-		this.addSortableList(list => list
+		this.addSortableList<RuleSetting>(list => list
 			.setClass('iconic-sortable-list')
 			.then(() => this.ruleList = list)
-			.onMove((setting: RuleSetting, newIndex) => {
+			.onMove((setting, newIndex) => {
 				let { id, page } = setting.rule;
 				this.ruleManager.moveRule(page, id, newIndex, true);
 			})
@@ -173,7 +170,7 @@ export default class RulePicker extends ModalEx {
 		if (this.addRuleSetting.settingEl.isShown())
 			this.addRuleSetting.setHidden(true, true);
 
-		let settings = this.ruleList.settings as RuleSetting[],
+		let settings = this.ruleList.settings,
 			search = prepareFuzzySearch(query);
 
 		this.searchResult = settings
@@ -217,8 +214,7 @@ export default class RulePicker extends ModalEx {
 		this.ruleList.clear();
 
 		rules.forEach(rule => this.ruleList.addSetting(
-			RuleSetting,
-			[this.ruleList.listEl, this, this.plugin, rule]
+			new RuleSetting(this.ruleList.listEl, this, this.plugin, rule)
 		));
 
 		if (this.searchMode) this.runSearch(this.searchQuery);

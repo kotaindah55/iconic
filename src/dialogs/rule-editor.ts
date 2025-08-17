@@ -24,7 +24,7 @@ export default class RuleEditor extends ModalEx {
 	private matchBtnMap: Record<string, ButtonExComponent>;
 	
 	private addCondSetting: Setting;
-	private conditionList: SortableList;
+	private conditionList: SortableList<ConditionSetting>;
 
 	private requestUpdateJudger: Debouncer<[], unknown>;
 
@@ -50,7 +50,7 @@ export default class RuleEditor extends ModalEx {
 	public override onOpen(): void {
 		this.rule.conditions.forEach(cond => this.addCondition(cond));
 
-		this.conditionList.onAdd((setting: ConditionSetting) => {
+		this.conditionList.onAdd(setting => {
 			this.rule.conditions.push(setting.condition);
 			this.requestUpdateJudger();
 		});
@@ -141,9 +141,9 @@ export default class RuleEditor extends ModalEx {
 		);
 
 		// SETTING_LIST: Conditions
-		this.addSortableList(list => list
+		this.addSortableList<ConditionSetting>(list => list
 			.setClass('iconic-sortable-list')
-			.onRemove((setting: ConditionSetting) => {
+			.onRemove(setting => {
 				this.rule.conditions.remove(setting.condition);
 				this.requestUpdateJudger();
 			})
@@ -224,11 +224,9 @@ export default class RuleEditor extends ModalEx {
 	 */
 	private addCondition(cond?: RuleCondition): void {
 		cond ??= { source: 'name', operator: 'is', value: '' };
-		this.conditionList.addSetting(
-			ConditionSetting, [this.conditionList.listEl, this.plugin, this.page, cond],
-			(setting: ConditionSetting, list) => setting
-				.onChange(() => this.requestUpdateJudger())
-				.onRemove(() => list.removeSetting(setting))
+		this.conditionList.addSetting(new ConditionSetting(this.conditionList.listEl, this.plugin, this.page, cond)
+			.onChange(() => this.requestUpdateJudger())
+			.onRemove(self => this.conditionList.removeSetting(self))
 		);
 	}
 
@@ -237,7 +235,6 @@ export default class RuleEditor extends ModalEx {
 	 */
 	private removeCondition(cond: RuleCondition): void {
 		this.conditionList.settings.some(setting => {
-			if (!(setting instanceof ConditionSetting)) return false;
 			if (cond !== setting.condition) return false;
 			this.conditionList.removeSetting(setting);
 			return true;
