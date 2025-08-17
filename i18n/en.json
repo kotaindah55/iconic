@@ -16,6 +16,8 @@
 		"rulesDesc": "The higher its position, the higher its precedence.",
 		"search": "Search rules...",
 		"addRule": "Add rule",
+		"addRuleAfter": "Add rule after",
+		"duplicateRule": "Duplicate rule",
 		"editRule": "Edit rule",
 		"removeRule": "Remove rule",
 		"untitledRule": "Untitled rule",
