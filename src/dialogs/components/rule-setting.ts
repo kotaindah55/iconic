@@ -1,4 +1,4 @@
-import { App, ExtraButtonComponent, ToggleComponent } from 'obsidian';
+import { App, ExtraButtonComponent, Menu, Platform, ToggleComponent } from 'obsidian';
 import { SettingEx } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import { RuleItem, RulePage } from '../../model/rule';
 import { setIconWithColor } from '../../utils/icon-utils';
@@ -6,6 +6,7 @@ import Locales from '../../locales';
 import IconicPlugin from '../../main';
 import RuleEditor from '../rule-editor';
 import RulePicker from '../rule-picker';
+import { handleLongPress } from '../../@external/obsidian-plugin-helper/src/dom';
 
 export default class RuleSetting extends SettingEx {
 	private readonly app: App;
@@ -32,6 +33,10 @@ export default class RuleSetting extends SettingEx {
 		this.page = rule.page;
 		this.rule = rule;
 		this.setClass('iconic-rule');
+
+		this.settingEl.addEventListener('contextmenu', evt => this.openContextMenu(evt));
+		if (Platform.isIosApp)
+			handleLongPress(this.settingEl, evt => this.openContextMenu(evt));
 
 		// BUTTON: Rule icon
 		this.addExtraButton(btn => btn
@@ -123,5 +128,27 @@ export default class RuleSetting extends SettingEx {
 			this.nameEl.focus();
 			this.nameEl.doc.getSelection()?.selectAllChildren(this.nameEl);
 		}
+	}
+
+	private openContextMenu(evt: MouseEvent): void {
+		Menu.forEvent(evt)
+			.addItem(item => item
+				.setTitle(Locales.t('rulePicker.addRuleAfter'))
+				.setIcon('lucide-plus-circle')
+				.setDisabled(this.parent.searchMode)
+				.onClick(() => this.parent.addNewRuleAfter(this))
+			)
+			.addItem(item => item
+				.setTitle(Locales.t('rulePicker.duplicateRule'))
+				.setIcon('lucide-files')
+				.setDisabled(this.parent.searchMode)
+				.onClick(() => this.parent.duplicateRule(this))
+			)
+			.addItem(item => item
+				.setTitle(Locales.t('rulePicker.removeRule'))
+				.setIcon('lucide-trash-2')
+				.setWarning(true)
+				.onClick(() => this.parent.removeRule(this))
+			);
 	}
 }
