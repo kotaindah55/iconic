@@ -8,8 +8,7 @@ const workspaceLeafFactory = (plugin: IconicPlugin): ObjectFactory<WorkspaceLeaf
 	updateHeader: oldFn => function (this: WorkspaceLeaf) {
 		oldFn.call(this);
 		if (!this.workspace.iconRenderer) return;
-		let { iconRenderer } = this.workspace;
-		iconRenderer.renderLeaf(this);
+		this.workspace.iconRenderer.renderLeafIcon(this);
 	},
 	onOpenTabHeaderMenu: oldFn => function (this: WorkspaceLeaf, evt, tabHeaderEl) {
 		oldFn.call(this, evt, tabHeaderEl);

@@ -1,8 +1,6 @@
 import { TFile, Workspace, WorkspaceLeaf } from 'obsidian';
-import { getFilepathFromLeaf } from '../../@external/obsidian-plugin-helper/src/obsidian';
 import { OPENABLE_FILE_TYPES } from '../../constants/view-types';
 import { getLeavesOfOpenableFile } from '../../utils/workspace-utils';
-import { IconItemCategory } from '../../model/icon-item';
 import IconicPlugin from '../../main';
 import FileIconManager from '../../managers/file-icon-manager';
 import LeafIconManager from '../../managers/leaf-icon-manager';
@@ -99,38 +97,12 @@ export default class LeafIconRenderer extends IconRenderer {
 	/**
 	 * (Re)render icon for a single leaf.
 	 */
-	public renderLeaf(leaf: WorkspaceLeaf): void {
-		// Could be a file path or the view type.
-		let id = leaf.view.getViewType(),
-			iconEl = leaf.tabHeaderInnerIconEl;
-
-		// Add iconic class if it doesn't have it.
-		iconEl.addClass('iconic-icon');
-		
-		// Check if the current leaf wraps FileView instance that has a file
-		// inside.
-		let filepath = getFilepathFromLeaf(leaf),
-			category: IconItemCategory = 'leaf',
-			icon: string,
-			color: string | undefined;
-		
-		// If the type is one of the OPENABLE_FILE_TYPES, then use file icon
-		// instead.
-		if (filepath && OPENABLE_FILE_TYPES.has(id)) {
-			let iconItem = this.fileIconManager.getIconItem(filepath);
-			id = filepath;
-			icon = iconItem.icon ?? iconItem.iconDefault ?? leaf.getIcon();
-			color = iconItem.color;
-			category = iconItem.category;
-		} else {
-			let iconItem = this.iconManager.getIconItem(id);
-			icon = iconItem.icon ?? leaf.getIcon();
-			color = iconItem.color;
-		}
+	public renderLeafIcon(leaf: WorkspaceLeaf): void {
+		let iconEl = leaf.tabHeaderInnerIconEl,
+			iconItem = this.iconManager.getLeafIcon(leaf);
 
 		this.plugin.setIcon(
-			iconEl,
-			{ id, category, icon, color },
+			iconEl, iconItem,
 			{ reuse: true, noHandler: true }
 		);
 	}
@@ -142,7 +114,7 @@ export default class LeafIconRenderer extends IconRenderer {
 	 */
 	protected renderSingle(id: string): void {
 		let leaves = this.workspace.getLeavesOfType(id);
-		leaves.forEach(leaf => this.renderLeaf(leaf));
+		leaves.forEach(leaf => this.renderLeafIcon(leaf));
 	}
 
 	/**
@@ -158,7 +130,7 @@ export default class LeafIconRenderer extends IconRenderer {
 
 		// Get matched leaves and render their icon.
 		getLeavesOfOpenableFile(this.workspace, file).forEach(leaf => {
-			this.renderLeaf(leaf);
+			this.renderLeafIcon(leaf);
 		});
 	}
 
@@ -169,7 +141,7 @@ export default class LeafIconRenderer extends IconRenderer {
 		this.workspace.iterateAllLeaves(leaf => {
 			let viewType = leaf.view.getViewType();
 			if (!OPENABLE_FILE_TYPES.has(viewType)) return;
-			this.renderLeaf(leaf);
+			this.renderLeafIcon(leaf);
 		});
 	}
 
