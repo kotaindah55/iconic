@@ -1,6 +1,6 @@
 import { prepareFuzzySearch, SearchComponent, SearchResult } from 'obsidian';
 import { ModalEx, SettingEx, SortableList } from '../@external/obsidian-plugin-helper/src/obsidian';
-import { RulePage } from '../model/rule';
+import { RuleItem, RulePage } from '../model/rule';
 import IconicPlugin from '../main';
 import Locales from '../locales';
 import IconicSettings from '../model/settings';
@@ -76,6 +76,32 @@ export default class RulePicker extends ModalEx {
 		this.ruleManager.triggerDeferredUpdate();
 	}
 
+	public addNewRuleAfter(setting: RuleSetting): void {
+		if (setting.rule.page != this.page || this.searchMode) return;
+
+		let idx = this.getIndex(setting);
+		if (idx < 0) return;
+		this.addNewRule(idx + 1, setting.rule.page);
+	}
+
+	public duplicateRule(setting: RuleSetting): void {
+		if (setting.rule.page != this.page || this.searchMode) return;
+
+		let idx = this.getIndex(setting);
+		if (idx < 0) return;
+
+		let ruleSpec = RuleManager.getRuleSpec(setting.rule),
+			newRule = this.ruleManager.addRule(setting.rule.page, ruleSpec);
+
+		this.ruleManager.moveRule(setting.rule.page, newRule.id, idx + 1);
+		this.ruleList.moveSetting(this.ruleList.settings.last()!, idx + 1);
+	}
+
+	public removeRule(setting: RuleSetting): void {
+		let { page, id } = setting.rule;
+		this.ruleManager.deleteRule(page, id);
+	}
+
 	private draw(): void {
 		this.containerEl.addClass('mod-confirmation');
 		this.modalEl.addClass('iconic-rule-picker');
@@ -133,7 +159,7 @@ export default class RulePicker extends ModalEx {
 		this.addRuleSetting.addExtraButton(btn => btn
 			.setIcon('lucide-circle-plus')
 			.setTooltip(Locales.t('rulePicker.addRule'))
-			.onClick(() => this.addRule())
+			.onClick(() => this.addNewRule())
 			.extraSettingsEl.addClass('mod-success')
 		);
 	}
@@ -198,12 +224,29 @@ export default class RulePicker extends ModalEx {
 		if (this.searchMode) this.runSearch(this.searchQuery);
 	}
 
-	private addRule(): void {
-		this.ruleManager.addRule(this.page, {
+	private addNewRule(idx?: number, page: RulePage = this.page): void {
+		let lastIdx = this.ruleManager.getRules(page).length;
+		idx = Math.clamp(idx ?? lastIdx, 0, lastIdx);
+
+		let rule = this.ruleManager.addRule(this.page, {
 			name: 'Untitled rule',
-			icon: this.page == 'file' ? 'lucide-file' : 'lucide-folder',
+			icon: page == 'file' ? 'lucide-file' : 'lucide-folder',
 			match: 'all',
 			conditions: []
+		});
+
+		this.ruleManager.moveRule(page, rule.id, idx);
+
+		if (rule.page != this.page) return;
+
+		this.ruleList.moveSetting(this.ruleList.settings.last()!, idx);
+	}
+
+	private getIndex(settingOrRule: RuleSetting | RuleItem): number {
+		return this.ruleList.settings.findIndex(setting => {
+			return settingOrRule instanceof RuleSetting
+				? setting == settingOrRule
+				: setting.rule == settingOrRule;
 		});
 	}
 }

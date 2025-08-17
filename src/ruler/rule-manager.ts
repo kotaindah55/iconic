@@ -424,4 +424,17 @@ export default class RuleManager extends Events {
 			)
 		);
 	}
+
+	/**
+	 * Get a rule spec from a rule item. The conditions will be deep-copied.
+	 */
+	public static getRuleSpec(rule: RuleItem): RuleSpec {
+		return {
+			name: rule.name,
+			icon: rule.icon,
+			color: rule.color,
+			match: rule.match,
+			conditions: window.structuredClone(rule.conditions)
+		}
+	}
 }
