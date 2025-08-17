@@ -128,7 +128,7 @@ export default class RuleManager extends Events {
 	/**
 	 * Add a page rule, its id will be generated automatically.
 	 */
-	public addRule(page: RulePage, spec: RuleSpec, enabled = false, defer = false): void {
+	public addRule(page: RulePage, spec: RuleSpec, enabled = false, defer = false): RuleItem {
 		let id = Date.now().toString(36),
 			rule: RuleItem = { ...spec, page, id, enabled },
 			reactive = false;
@@ -156,6 +156,8 @@ export default class RuleManager extends Events {
 			if (defer) this.deferUpdate(page);
 			else this.trigger('iconic:update', page);
 		}
+
+		return rule;
 	}
 
 	/**
