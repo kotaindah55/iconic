@@ -52,6 +52,7 @@ import {
 	patchMetadataEditor,
 	patchPropertyTreeItem,
 	patchPropertyWidgets,
+	patchTabSwitcher,
 	patchTagSuggest,
 	patchTagTreeItem,
 	patchWikilinkSuggest,
@@ -190,6 +191,7 @@ export default class IconicPlugin extends PluginBase<IconicSettings> {
 		this.register(patchGlobalSearchTreeRoot(this.app));
 		this.register(patchMarkdownView());
 		this.register(patchMetadataEditor(this));
+		this.register(patchTabSwitcher(this));
 		this.register(patchPropertyTreeItem(this));
 		this.register(patchPropertyWidgets(this));
 		this.register(patchTagTreeItem(this.app));

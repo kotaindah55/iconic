@@ -7,6 +7,7 @@ export * from './factories/folder-tree-item';
 export * from './factories/global-search-tree-root';
 export * from './factories/markdown-view';
 export * from './factories/metadata-editor';
+export * from './factories/mobile-tab-switcher';
 export * from './factories/property-tree-item';
 export * from './factories/property-widgets';
 export * from './factories/tag-suggest';
