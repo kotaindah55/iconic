@@ -80,7 +80,7 @@ export default class GlobalSearchIconRenderer extends IconRenderer {
 
 		// Unload this component as soon as the plugin was unloaded.
 		this.registerEvent(
-			this.app.workspace.on('iconic:plugin-unload', () => this.parent?.removeChild(this))
+			this.app.workspace.on('iconic-mod:plugin-unload', () => this.parent?.removeChild(this))
 		);
 	}
 

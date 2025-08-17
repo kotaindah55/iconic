@@ -132,6 +132,9 @@ declare module 'obsidian' {
 	interface Workspace {
 		/** @patch */
 		iconRenderer: LeafIconRenderer;
+		/**
+		 * @deprecated
+		 */
 		on(name: 'iconic:plugin-unload', callback: () => unknown, ctx?: unknown): EventRef;
 		on(name: 'iconic:ribbon-item-add', callback: (item: RibbonItem) => unknown, ctx?: unknown): EventRef;
 	}

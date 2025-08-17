@@ -32,7 +32,7 @@ export default class TagIconPostProcessor extends MarkdownRenderChild {
 		);
 
 		this.registerEvent(
-			this.app.workspace.on('iconic:plugin-unload', () => this.unload())
+			this.app.workspace.on('iconic-mod:plugin-unload', () => this.unload())
 		);
 	}
 
